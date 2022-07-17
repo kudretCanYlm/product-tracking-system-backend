@@ -37,7 +37,7 @@ namespace DAS.Model.Model.User
         public string AccountNo { get; set; }
         public DateTime Expiry { get; set; }
         public PaymentEnum PaymentType { get; set; }
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
         [ForeignKey("UserId")]
         public UserEntity UserEntity { get; set; }
