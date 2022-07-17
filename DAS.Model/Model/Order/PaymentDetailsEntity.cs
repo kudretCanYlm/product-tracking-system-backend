@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentValidation;
 
 namespace DAS.Model.Model.Order
 {
@@ -35,5 +36,16 @@ namespace DAS.Model.Model.Order
         public DateTime? CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
+    }
+
+    public class PaymentDetailsValidation:AbstractValidator<PaymentDetailsEntity>
+    {
+        public PaymentDetailsValidation()
+        {
+            RuleFor(x => x.Amount).GreaterThanOrEqualTo(0);
+            RuleFor(x => x.CreatedAt).NotEmpty().NotNull();
+            RuleFor(x => x.Provider).Length(5, 50);
+            RuleFor(x => x.Status).Length(5, 50);
+        }
     }
 }
