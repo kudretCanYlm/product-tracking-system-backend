@@ -6,10 +6,11 @@ namespace DAS.Model.Base
 {
     public class BaseEntity:IBaseEntity
     {
-        public BaseEntity()
+        public BaseEntity(bool isNewGuid=true)
         {
             //create new guid when created the instance
-            Id = Guid.NewGuid();
+            if(isNewGuid)
+                Id = Guid.NewGuid();
         }
 
         [Key]

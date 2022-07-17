@@ -30,4 +30,5 @@ namespace DAS.Model.Model.Location
         [ForeignKey("CountryId")]
         public CountryEntity Country { get; set; }
     }
+
 }
