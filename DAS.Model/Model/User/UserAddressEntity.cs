@@ -20,12 +20,12 @@ namespace DAS.Model.Model.User
         public string AddressLine_2 { get; set; }
 
         //will change
-        public int City { get; set; }
-        public int Country { get; set; }
+        public Guid City { get; set; }
+        public Guid Country { get; set; }
         public string PostalCode { get; set; }
         public string Telephone { get; set; }
         public string Mobile { get; set; }
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
         [ForeignKey("UserId")]
         public UserEntity UserEntity { get; set; }
