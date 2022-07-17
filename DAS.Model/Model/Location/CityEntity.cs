@@ -1,4 +1,5 @@
 ﻿using DAS.Model.Base;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -29,6 +30,15 @@ namespace DAS.Model.Model.Location
 
         [ForeignKey("CountryId")]
         public CountryEntity Country { get; set; }
+    }
+
+    public class CityValidation:AbstractValidator<CityEntity>
+    {
+        public CityValidation()
+        {
+            RuleFor(x => x.CityName).Length(5, 50);
+            RuleFor(x => x.CountryId).NotEmpty();
+        }
     }
 
 }
