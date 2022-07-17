@@ -47,6 +47,8 @@
     <Compile Include="Base\Interfaces\IBaseTimeEntity.cs" />
     <Compile Include="Model\Enums\PaymentEnum.cs" />
     <Compile Include="Model\Enums\RoleEnum.cs" />
+    <Compile Include="Model\Location\CityEntity.cs" />
+    <Compile Include="Model\Location\CountryEntity.cs" />
     <Compile Include="Model\Order\OrderDetailsEntity.cs" />
     <Compile Include="Model\Order\OrderItemsEntity.cs" />
     <Compile Include="Model\Order\PaymentDetailsEntity.cs" />
