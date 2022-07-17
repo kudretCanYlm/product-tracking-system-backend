@@ -48,9 +48,9 @@ namespace DAS.Model.Model.Product
         public DateTime? CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
-        public int CategoryId { get; set; }
-        public int InventoryId { get; set; }
-        public int DiscountId { get; set; }
+        public Guid CategoryId { get; set; }
+        public Guid InventoryId { get; set; }
+        public Guid DiscountId { get; set; }
 
         [ForeignKey("CategoryId")]
         public ProductCategoryEntity ProductCategory { get; set; }
