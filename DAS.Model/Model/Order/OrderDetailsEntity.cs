@@ -2,6 +2,7 @@
 using DAS.Model.Base.Interfaces;
 using DAS.Model.Model.User;
 using System;
+using FluentValidation;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -36,5 +37,14 @@ namespace DAS.Model.Model.Order
         [ForeignKey("PaymentId")]
         public PaymentDetailsEntity PaymentDetails { get; set; }
         
+    }
+
+    public class OrderDetailsValidation:AbstractValidator<OrderDetailsEntity>
+    {
+        public OrderDetailsValidation()
+        {
+            RuleFor(x => x.CreatedAt).NotEmpty().NotEmpty();
+            RuleFor(x => x.Total).GreaterThanOrEqualTo(0);
+        }
     }
 }
