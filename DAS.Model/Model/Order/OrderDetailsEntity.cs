@@ -22,9 +22,9 @@ namespace DAS.Model.Model.Order
             this.Total = total;
         }
 
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public decimal Total { get; set; } = 0;
-        public int PaymentId { get; set; }
+        public Guid PaymentId { get; set; }
         public DateTime? CreatedAt { get ; set ; }
         public DateTime? ModifiedAt { get ; set ; }
         public DateTime? DeletedAt { get ; set ; }
