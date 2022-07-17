@@ -1,4 +1,5 @@
 ﻿using DAS.Model.Base;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,5 +30,14 @@ namespace DAS.Model.Model.Location
 
         public string CountryName { get; set; }
         public string CountryCode { get; set; }
+    }
+
+    public class CountryValidation : AbstractValidator<CountryEntity>
+    {
+        public CountryValidation()
+        {
+            RuleFor(x => x.CountryName).Length(5, 50);
+            RuleFor(x => x.CountryCode).NotEmpty();
+        }
     }
 }
