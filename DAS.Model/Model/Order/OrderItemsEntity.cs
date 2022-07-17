@@ -1,6 +1,7 @@
 ﻿using DAS.Model.Base;
 using DAS.Model.Base.Interfaces;
 using System;
+using FluentValidation;
 
 namespace DAS.Model.Model.Order
 {
@@ -22,4 +23,14 @@ namespace DAS.Model.Model.Order
         public DateTime? ModifiedAt { get ; set ; }
         public DateTime? DeletedAt { get ; set ; }
     }
+
+    public class OrderItemsusingValidation:AbstractValidator<OrderItemsEntity>
+    {
+        public OrderItemsusingValidation()
+        {
+            RuleFor(x => x.CreatedAt).NotEmpty().NotNull();
+            RuleFor(x => x.Quantity).GreaterThanOrEqualTo(0);
+        }
+    }
+
 }
