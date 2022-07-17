@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentValidation;
 
 namespace DAS.Model.Model.Product
 {
@@ -46,5 +47,17 @@ namespace DAS.Model.Model.Product
         public DateTime? CreatedAt { get ; set ; }
         public DateTime? ModifiedAt { get ; set ; }
         public DateTime? DeletedAt { get ; set ; }
+    }
+
+    public class DiscountValidation:AbstractValidator<DiscountEntity>
+    {
+        public DiscountValidation()
+        {
+            RuleFor(x => x.Active).NotNull().NotEmpty();
+            RuleFor(x => x.CreatedAt).NotNull().NotEmpty();
+            RuleFor(x => x.Description).Length(5, 500);
+            RuleFor(x => x.DiscountPercent).GreaterThanOrEqualTo(0);
+            RuleFor(x => x.Name).Length(5, 50);
+        }
     }
 }
