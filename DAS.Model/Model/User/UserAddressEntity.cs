@@ -1,6 +1,7 @@
 ﻿using DAS.Model.Base;
 using DAS.Model.Model.Location;
 using System;
+using FluentValidation;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -18,7 +19,7 @@ namespace DAS.Model.Model.User
         }
         
         public string AddressLine_1 { get; set; }
-        public string AddressLine_2 { get; set; }
+        public string AddressLine_2 { get; set; } = "Empty";
 
         public Guid CityId { get; set; }
         public Guid CountryId { get; set; }
@@ -33,5 +34,16 @@ namespace DAS.Model.Model.User
         public CityEntity City { get; set; }
         [ForeignKey("CountryId")]
         public CountryEntity Country { get; set; }
+    }
+
+    public class UserAddressValidation:AbstractValidator<UserAddressEntity>
+    {
+        public UserAddressValidation()
+        {
+            RuleFor(x => x.AddressLine_1).Length(5,500);
+            RuleFor(x => x.PostalCode).NotNull().NotEmpty();
+            RuleFor(x => x.Mobile).Length(15);
+
+        }
     }
 }

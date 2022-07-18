@@ -1,6 +1,7 @@
 ﻿using DAS.Model.Base;
 using DAS.Model.Base.Interfaces;
 using System;
+using FluentValidation;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,5 +28,14 @@ namespace DAS.Model.Model.Product
         public DateTime? ModifiedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
 
+    }
+
+    public class ProductInventoryValidation:AbstractValidator<ProductInventoryEntity>
+    {
+        public ProductInventoryValidation()
+        {
+            RuleFor(x => x.Quantity).GreaterThanOrEqualTo(0);
+            RuleFor(x => x.CreatedAt).NotNull().NotEmpty();
+        }
     }
 }
