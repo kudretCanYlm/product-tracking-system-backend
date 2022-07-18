@@ -1,5 +1,6 @@
 ﻿using DAS.Model.Base;
 using DAS.Model.Base.Interfaces;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -61,5 +62,17 @@ namespace DAS.Model.Model.Product
         [ForeignKey("DiscountId")]
         public DiscountEntity Discount { get; set; }
 
+    }
+
+    public class ProductValidation: AbstractValidator<ProductEntity>
+    {
+        public ProductValidation()
+        {
+            RuleFor(x => x.Name).Length(5, 50);
+            RuleFor(x => x.Description).Length(5, 50);
+            RuleFor(x => x.SKU).NotEmpty().NotNull();
+            RuleFor(x => x.Price).GreaterThanOrEqualTo(0);
+            RuleFor(x => x.CreatedAt).NotNull().NotEmpty();
+        }
     }
 }
