@@ -1,5 +1,6 @@
 ﻿using DAS.Model.Base;
 using DAS.Model.Base.Interfaces;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,5 +39,15 @@ namespace DAS.Model.Model.Product
         public DateTime? ModifiedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
 
+    }
+
+    public class ProductCategoryValidation:AbstractValidator<ProductCategoryEntity>
+    {
+        public ProductCategoryValidation()
+        {
+            RuleFor(x => x.Name).Length(5, 50);
+            RuleFor(x => x.Description).Length(5, 50);
+            RuleFor(x => x.CreatedAt).NotNull().NotEmpty();
+        }
     }
 }
