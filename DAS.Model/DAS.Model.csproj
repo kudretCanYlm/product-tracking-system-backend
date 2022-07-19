@@ -66,6 +66,7 @@
     <Compile Include="Base\BaseEntity.cs" />
     <Compile Include="Base\Interfaces\IBaseEntity.cs" />
     <Compile Include="Base\Interfaces\IBaseTimeEntity.cs" />
+    <Compile Include="Model\Authentication\LoginEntity.cs" />
     <Compile Include="Model\Enums\PaymentEnum.cs" />
     <Compile Include="Model\Enums\RoleEnum.cs" />
     <Compile Include="Model\Location\CityEntity.cs" />
@@ -85,5 +86,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
