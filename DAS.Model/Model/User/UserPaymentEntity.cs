@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using FluentValidation;
 using System.Threading.Tasks;
 
 namespace DAS.Model.Model.User
@@ -18,21 +19,11 @@ namespace DAS.Model.Model.User
 
         public UserPaymentEntity(string provider,string accountNo,PaymentEnum paymentType):base()
         {
-            //provider control
-            if (String.IsNullOrEmpty(provider))
-                this.Provider = "Empty";
-            else
                 this.Provider = provider;
-            //TEST
-
-            //accountNo control
-            if (String.IsNullOrEmpty(accountNo))
-                this.AccountNo = "Empty";
-            else
+                this.AccountNo = accountNo;
                 this.AccountNo = accountNo;
         }
 
-        
         public string Provider { get; set; }
         public string AccountNo { get; set; }
         public DateTime Expiry { get; set; }
@@ -41,5 +32,16 @@ namespace DAS.Model.Model.User
 
         [ForeignKey("UserId")]
         public UserEntity UserEntity { get; set; }
+    }
+
+    public class UserPaymentValidation:AbstractValidator<UserPaymentEntity>
+    {
+        public UserPaymentValidation()
+        {
+            //could change
+            RuleFor(x => x.AccountNo).NotEmpty().NotNull();
+            RuleFor(x => x.Expiry).NotEmpty().NotNull();
+            RuleFor(x => x.PaymentType).NotNull().NotEmpty();
+        }
     }
 }
