@@ -19,27 +19,9 @@ namespace DAS.Model.Model.Product
 
         public ProductEntity(string name,string description,string sku,decimal price) :base()
         {
-            //name control
-            if (String.IsNullOrEmpty(name))
-                this.Name = "Empty";
-            else
-                this.Name = name.ToLower();
-
-            //description control
-            if (String.IsNullOrEmpty(description))
-                this.Description = "Empty";
-            else
-                this.Description = description.ToLower();
-
-            //sku control
-            if (String.IsNullOrEmpty(sku))
-                 this.SKU= "Empty";
-            else
-                this.SKU = sku.ToLower();
-
-
-
-
+                this.Name = name;
+                this.Description = description;
+                this.SKU = sku;
         }
 
         public string Name { get; set; }
