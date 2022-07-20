@@ -17,15 +17,8 @@ namespace DAS.Model.Model.Location
 
         public CountryEntity(string countryName,string countryCode)
         {
-            if (String.IsNullOrEmpty(countryName))
-                this.CountryName = "Empty";
-            else
                 this.CountryName = countryName;
-
-            if (String.IsNullOrEmpty(countryCode))
-                this.CountryCode = "Empty";
-            else
-                this.CountryCode = "Empty";
+                this.CountryCode = countryCode;
         }
 
         public string CountryName { get; set; }
