@@ -15,29 +15,12 @@ namespace DAS.Model.Model.Product
         {
 
         }
-        public DiscountEntity(string name,string description,double discountPercent, bool? active) :base()
+        public DiscountEntity(string name,string description,double discountPercent, bool active) :base()
         {
-            //name control
-            if (String.IsNullOrEmpty(name))
-                this.Name = "Empty";
-            else
-                this.Name = name.ToLower();
-
-            //description control
-            if (String.IsNullOrEmpty(description))
-                this.Description = "Empty";
-            else
-                this.Description = description.ToLower();
-
-            //discountPercent control
-            if (discountPercent >= 0)
+                this.Name = name;
+                this.Description = description;
                 this.DiscountPercent = discountPercent;
-            else
-                this.DiscountPercent = 0;
-
-            //active control
-            if (active != null)
-                this.Active = (bool)active;
+                this.Active = active;
         }
 
         public string Name { get; set; }
