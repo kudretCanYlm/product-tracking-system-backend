@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAS.Model", "DAS.Model\DAS.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAS.Console", "DAS.Console\DAS.Console.csproj", "{A22D0070-C56E-42F5-86F6-39A4C6036DB1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAS.Test", "DAS.Test\DAS.Test.csproj", "{E0CE71A0-21A8-4168-A416-C42283911FCE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A22D0070-C56E-42F5-86F6-39A4C6036DB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A22D0070-C56E-42F5-86F6-39A4C6036DB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A22D0070-C56E-42F5-86F6-39A4C6036DB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0CE71A0-21A8-4168-A416-C42283911FCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0CE71A0-21A8-4168-A416-C42283911FCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0CE71A0-21A8-4168-A416-C42283911FCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0CE71A0-21A8-4168-A416-C42283911FCE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
