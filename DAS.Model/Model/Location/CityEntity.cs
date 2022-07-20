@@ -18,9 +18,6 @@ namespace DAS.Model.Model.Location
 
         public CityEntity(string cityName):base()
         {
-            if (String.IsNullOrEmpty(cityName))
-                this.CityName = "Empty";
-            else
                 this.CityName = cityName;
         }
 
