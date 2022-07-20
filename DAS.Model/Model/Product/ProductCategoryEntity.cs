@@ -13,23 +13,12 @@ namespace DAS.Model.Model.Product
     {
         public ProductCategoryEntity():base()
         {
-            Name = "Empty";
-            Description = "Empty";
+
         }
         public ProductCategoryEntity(string name,string description) :base()
         {
-            //name control
-            if (String.IsNullOrEmpty(name))
-                name = "Empty";
-            else
-                this.Name = name.ToLower();
-
-            //description control
-            if (String.IsNullOrEmpty(description))
-                description = "Empty";
-            else
-                this.Description = description.ToLower();
-
+                this.Name = name;
+                this.Description = description;
         }
         public string Name { get; set; }
 
