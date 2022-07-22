@@ -15,7 +15,7 @@ namespace DAS.Model.Model.Location
 
         }
 
-        public CountryEntity(string countryName,string countryCode)
+        public CountryEntity(string countryName,string countryCode):base()
         {
                 this.CountryName = countryName;
                 this.CountryCode = countryCode;
@@ -29,8 +29,8 @@ namespace DAS.Model.Model.Location
     {
         public CountryValidation()
         {
-            RuleFor(x => x.CountryName).Length(5, 50);
-            RuleFor(x => x.CountryCode).NotEmpty();
+            RuleFor(x => x.CountryName).Length(5, 50).NotNull().NotEmpty();
+            RuleFor(x => x.CountryCode).NotEmpty().NotNull();
         }
     }
 }

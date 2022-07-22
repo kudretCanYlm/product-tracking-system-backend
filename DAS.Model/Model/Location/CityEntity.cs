@@ -33,8 +33,7 @@ namespace DAS.Model.Model.Location
     {
         public CityValidation()
         {
-            RuleFor(x => x.CityName).Length(5, 50);
-            RuleFor(x => x.CountryId).NotEmpty();
+            RuleFor(x => x.CityName).Length(5, 50).NotEmpty().NotNull();
         }
     }
 

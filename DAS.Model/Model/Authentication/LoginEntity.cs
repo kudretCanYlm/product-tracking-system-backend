@@ -34,8 +34,8 @@ namespace DAS.Model.Model.Authentication
     {
         public LoginValidation()
         {
-            RuleFor(x => x.Username).Length(5, 50);
-            RuleFor(x => x.Password).Length(5, 50);
+            RuleFor(x => x.Username).Length(5, 50).NotEmpty().NotNull();
+            RuleFor(x => x.Password).Length(5, 50).NotEmpty().NotNull();
             RuleFor(x => x.CreatedAt).NotEmpty().NotNull();
         }
     }

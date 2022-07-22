@@ -72,7 +72,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ModelTest\PersonValidatorTest.cs" />
+    <Compile Include="ModelTest\Authentication.cs" />
+    <Compile Include="ModelTest\Location.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
