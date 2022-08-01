@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DAS.Model.Model.Product;
 using DAS.Model.Model.User;
+using OpenCvSharp;
 
 namespace DAS.Console
 {
@@ -12,18 +13,19 @@ namespace DAS.Console
     {
         static void Main(string[] args)
         {
-            var produductCategory = new ProductCategoryEntity();
-            var user = new UserEntity();
+            var src = new Mat("dog.jpg", ImreadModes.Grayscale);
+            var dst = new Mat();
 
-            System.Console.WriteLine(user.UserRole);
-            System.Console.WriteLine(produductCategory.Id);
-            System.Console.WriteLine(produductCategory.Name);
-            System.Console.WriteLine(produductCategory.Description);
-            System.Console.WriteLine(produductCategory.CreatedAt);
-            System.Console.WriteLine(produductCategory.DeletedAt);
-            System.Console.WriteLine(produductCategory.ModifiedAt);
+            System.Console.WriteLine("width: " + src.Rows + "\nheight: " + src.Cols);
 
-            System.Console.ReadKey();
+            Cv2.CvtColor(src, dst, ColorConversionCodes.BayerBG2BGR);
+
+            Cv2.Canny(src, dst, 50, 200);
+            using (new Window("src image", src))
+            using (new Window("dst image", dst))
+            {
+                Cv2.WaitKey();
+            }
 
         }
     }

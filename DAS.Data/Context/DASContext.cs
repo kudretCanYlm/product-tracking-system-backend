@@ -35,6 +35,10 @@ namespace DAS.Data.Context
 
             base.OnModelCreating(modelBuilder);
         }
+        public virtual void Commit()
+        {
+            base.SaveChanges();
+        }
 
         //Dbsets
 
