@@ -101,5 +101,21 @@ namespace DAS.Test.ModelTest
             //assert
             result.ShouldHaveAnyValidationError();
         }
+
+        [TestMethod]
+        public void Should_have_work_CreateMD5ForUsernameAndPassword_medhod()
+        {
+            //arrange
+            LoginEntity loginEntity = new LoginEntity();
+            loginEntity.CreatedAt = null;
+            loginEntity.Username = "kudret_can_ylm";
+            loginEntity.Password = "v843as5ddfc";
+
+            //act
+            loginEntity.CreateMD5ForUsernameAndPassword();
+
+            //assert
+            Assert.IsTrue(loginEntity.Username.Length > 30 && loginEntity.Username.Length > 30);
+        }
     }
 }
