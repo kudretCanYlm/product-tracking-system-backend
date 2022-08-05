@@ -16,9 +16,15 @@ namespace DAS.Core.Infrastructure
         {
             this.databaseFactory = databaseFactory;
         }
+
+        protected DASContext DasContext
+        {
+            get { return dasContext ?? (dasContext = databaseFactory.Get()); }
+        }
+
         public void Commit()
         {
-            dasContext.Commit();
+            DasContext.Commit();
         }
     }
 }
