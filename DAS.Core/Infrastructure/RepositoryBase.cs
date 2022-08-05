@@ -19,7 +19,7 @@ namespace DAS.Core.Infrastructure
         protected RepositoryBase(IDatabaseFactory databaseFactory)
         {
             DatabaseFactory = databaseFactory;
-            dbset = dasContext.Set<T>();
+            dbset = DasContext.Set<T>();
         }
 
         protected IDatabaseFactory DatabaseFactory
@@ -28,7 +28,7 @@ namespace DAS.Core.Infrastructure
             private set;
         }
 
-        protected DASContext DataContext
+        protected DASContext DasContext
         {
             get { return dasContext ?? (dasContext = DatabaseFactory.Get()); }
         }
