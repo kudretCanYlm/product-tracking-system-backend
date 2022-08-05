@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAS.Data.Migration
+namespace DAS.Data.Migrations
 {
     public class Configuration:DbMigrationsConfiguration<DASContext>
     {
