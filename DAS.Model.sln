@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAS.Data", "DAS.Data\DAS.Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAS.Core", "DAS.Core\DAS.Core.csproj", "{7979C834-2672-46E6-A141-D3DB69B69F03}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{F8E05AC5-5468-4047-AEAB-C841D2A69B82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAS.Service", "DAS.Service\DAS.Service.csproj", "{D61356A1-B653-4640-91B3-B428E1A56736}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{7979C834-2672-46E6-A141-D3DB69B69F03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7979C834-2672-46E6-A141-D3DB69B69F03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7979C834-2672-46E6-A141-D3DB69B69F03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8E05AC5-5468-4047-AEAB-C841D2A69B82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8E05AC5-5468-4047-AEAB-C841D2A69B82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8E05AC5-5468-4047-AEAB-C841D2A69B82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8E05AC5-5468-4047-AEAB-C841D2A69B82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D61356A1-B653-4640-91B3-B428E1A56736}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D61356A1-B653-4640-91B3-B428E1A56736}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D61356A1-B653-4640-91B3-B428E1A56736}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D61356A1-B653-4640-91B3-B428E1A56736}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
