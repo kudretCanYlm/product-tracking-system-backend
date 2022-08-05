@@ -1,4 +1,4 @@
-﻿using DAS.Data.Migration;
+﻿using DAS.Data.Migrations;
 using DAS.Model.Model.Authentication;
 using DAS.Model.Model.Location;
 using DAS.Model.Model.Media;
@@ -42,20 +42,20 @@ namespace DAS.Data.Context
 
         //Dbsets
 
-        public LoginEntity Login { get; set; }
-        public CityEntity City { get; set; }
-        public CountryEntity Country { get; set; }
-        public ImageEntity Image { get; set; }
-        public OrderDetailsEntity OrderDetails { get; set; }
-        public OrderItemsEntity OrderItems { get; set; }
-        public PaymentDetailsEntity PaymentDetails { get; set; }
-        public DiscountEntity DiscountEntity { get; set; }
-        public ProductCategoryEntity ProductCategory { get; set; }
-        public ProductEntity Product { get; set; }
-        public ProductInventoryEntity ProductInventory { get; set; }
-        public UserAddressEntity UserAddress { get; set; }
-        public UserEntity User { get; set; }
-        public UserPaymentEntity UserPayment { get; set; }
+        //public LoginEntity Login { get; set; }
+        //public CityEntity City { get; set; }
+        public DbSet<CountryEntity> Country { get; set; }
+        //public ImageEntity Image { get; set; }
+        //public OrderDetailsEntity OrderDetails { get; set; }
+        //public OrderItemsEntity OrderItems { get; set; }
+        //public PaymentDetailsEntity PaymentDetails { get; set; }
+        //public DiscountEntity DiscountEntity { get; set; }
+        //public ProductCategoryEntity ProductCategory { get; set; }
+        //public ProductEntity Product { get; set; }
+        //public ProductInventoryEntity ProductInventory { get; set; }
+        //public UserAddressEntity UserAddress { get; set; }
+        //public UserEntity User { get; set; }
+        //public UserPaymentEntity UserPayment { get; set; }
 
     }
 }
