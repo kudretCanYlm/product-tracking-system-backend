@@ -53,7 +53,7 @@
   <ItemGroup>
     <Compile Include="Context\BaseDbContext.cs" />
     <Compile Include="Context\DASContext.cs" />
-    <Compile Include="Migration\Configuration.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
