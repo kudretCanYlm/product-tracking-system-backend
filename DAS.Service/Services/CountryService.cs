@@ -14,9 +14,10 @@ namespace DAS.Service.Services
     public interface ICountyService
     {
         IEnumerable<CountryEntity> GetCountries();
-
         IEnumerable<CountryEntity> GetCountriesWithFilter(Expression<Func<CountryEntity, bool>> filter);
+        CountryEntity GetSingleCountry(Guid id);
         string AddCountry(CountryEntity countryEntity);
+        string UpdateCountry(CountryEntity countryEntity);
         void SaveCountry();
     }
 
@@ -41,7 +42,35 @@ namespace DAS.Service.Services
             if (result.IsValid)
             {
                 countryRepository.Add(countryEntity);
-                SaveCountry();
+
+                try
+                {
+                    SaveCountry();
+                }
+                catch (Exception ex)
+                {
+
+                    return ex.Message;
+                }
+
+                return "saved";
+            }
+
+            StringBuilder errors = new StringBuilder();
+
+            foreach (var error in result.Errors)
+                errors.AppendLine(error.ErrorMessage);
+
+            return errors.ToString();
+        }
+
+        public string UpdateCountry (CountryEntity countryEntity)
+        {
+            ValidationResult result = validator.Validate(countryEntity);
+
+            if (result.IsValid)
+            {
+                countryRepository.Update(countryEntity);
 
                 try
                 {
@@ -81,6 +110,13 @@ namespace DAS.Service.Services
         public void SaveCountry()
         {
             unitOfWork.Commit();
+        }
+
+        public CountryEntity GetSingleCountry(Guid id)
+        {
+            CountryEntity country = countryRepository.GetById(id);
+
+            return country;
         }
     }
 }
