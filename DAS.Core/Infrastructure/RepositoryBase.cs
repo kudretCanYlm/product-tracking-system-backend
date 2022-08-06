@@ -1,4 +1,5 @@
 ﻿using DAS.Data.Context;
+using DAS.Model.Base;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DAS.Core.Infrastructure
 {
-    public class RepositoryBase<T> where T:class
+    public class RepositoryBase<T> where T:BaseEntity
     {
         private DASContext dasContext;
         private readonly IDbSet<T> dbset;
@@ -40,7 +41,7 @@ namespace DAS.Core.Infrastructure
         public virtual void Update(T entity)
         {
             dbset.Attach(entity);
-            dasContext.Entry(entity).State = EntityState.Modified;
+            DasContext.Entry(entity).State = EntityState.Modified;
         }
         public virtual void Delete(T entity)
         {
@@ -52,7 +53,7 @@ namespace DAS.Core.Infrastructure
             foreach (T obj in objects)
                 dbset.Remove(obj);
         }
-        public virtual T GetById(long id)
+        public virtual T GetById(Guid id)
         {
             return dbset.Find(id);
         }
