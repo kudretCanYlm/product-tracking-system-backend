@@ -63,5 +63,20 @@ namespace Api.Controllers
 
             return Request.CreateResponse(HttpStatusCode.BadRequest, "not find country");
         }
+
+        public HttpResponseMessage Delete([FromUri] Guid id)
+        {
+            var country = countyService.GetSingleCountry(id);
+
+            if(country!=null)
+            {
+                string message = countyService.DeleteCountry(country);
+
+                return Request.CreateResponse(HttpStatusCode.Created, message);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.BadRequest, "not find country");
+
+        }
     }
 }
