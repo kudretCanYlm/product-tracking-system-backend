@@ -18,6 +18,7 @@ namespace DAS.Service.Services
         CountryEntity GetSingleCountry(Guid id);
         string AddCountry(CountryEntity countryEntity);
         string UpdateCountry(CountryEntity countryEntity);
+        string DeleteCountry(CountryEntity countryEntity);
         void SaveCountry();
     }
 
@@ -117,6 +118,23 @@ namespace DAS.Service.Services
             CountryEntity country = countryRepository.GetById(id);
 
             return country;
+        }
+
+        public string DeleteCountry(CountryEntity countryEntity)
+        {
+            countryRepository.Delete(countryEntity);
+
+            try
+            {
+                SaveCountry();
+
+                return "Deleted!";
+            }
+            catch (Exception ex)
+            {
+
+                return ex.Message;
+            }
         }
     }
 }
