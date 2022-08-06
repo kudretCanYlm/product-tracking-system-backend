@@ -7,7 +7,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Mvc;
 
 namespace Api.Controllers
 {
@@ -21,9 +20,8 @@ namespace Api.Controllers
             this.countyService = countyService;
         }
 
-
-
         // GET api/values
+        [CacheControl]
         public HttpResponseMessage Get()
         {
             var values = countyService.GetCountries();
