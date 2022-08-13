@@ -26,6 +26,9 @@ namespace Api
             var appXmlType = config.Formatters.XmlFormatter.SupportedMediaTypes.FirstOrDefault(t => t.MediaType == "application/xml");
             config.Formatters.XmlFormatter.SupportedMediaTypes.Remove(appXmlType);
             config.Formatters.Add(new BrowserJsonFormatter());
+
+            //Jwt
+            config.Filters.Add(new AuthorizeAttribute());
         }
     }
 }
