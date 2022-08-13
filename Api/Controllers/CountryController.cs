@@ -1,4 +1,5 @@
 ﻿using Api.Infrastructure.Attributes;
+using DAS.Model.Model.Enums;
 using DAS.Model.Model.Location;
 using DAS.Service.Services;
 using System;
@@ -10,6 +11,8 @@ using System.Web.Http;
 
 namespace Api.Controllers
 {
+    [RoutePrefix("country")]
+    [JwtAuthentication(RoleEnum.Admin)]
     public class CountryController : ApiController
     {
         ICountyService countyService;
