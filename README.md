@@ -9,8 +9,8 @@
 ### 2-add this entities:
 #### 1-Company 
 #### 2-Project 
-#### 3-User
+#### 3-User +
 #### 4-adress
-#### 5-login
-#### 5-images
-#### 5-location
+#### 5-login +
+#### 6-media
+#### 7-location
