@@ -4,6 +4,7 @@
     {
         User,
         Admin,
-        Owner
+        Owner,
+        NonRole
     }
 }
