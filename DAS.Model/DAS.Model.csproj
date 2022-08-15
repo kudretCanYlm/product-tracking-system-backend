@@ -83,7 +83,6 @@
     <Compile Include="Model\Product\ProductEntity.cs" />
     <Compile Include="Model\Product\ProductInventoryEntity.cs" />
     <Compile Include="Model\User\UserAddressEntity.cs" />
-    <Compile Include="Model\User\UserEntity.cs" />
     <Compile Include="Model\User\UserPaymentEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
