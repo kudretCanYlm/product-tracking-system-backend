@@ -1,12 +1,9 @@
 ﻿using DAS.Model.Base;
 using DAS.Model.Model.Enums;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
 using FluentValidation;
-using System.Threading.Tasks;
+using DAS.Model.Model.Authentication;
 
 namespace DAS.Model.Model.User
 {
@@ -31,7 +28,7 @@ namespace DAS.Model.Model.User
         public Guid UserId { get; set; }
 
         [ForeignKey("UserId")]
-        public UserEntity UserEntity { get; set; }
+        public LoginEntity LoginEntity { get; set; }
     }
 
     public class UserPaymentValidation:AbstractValidator<UserPaymentEntity>

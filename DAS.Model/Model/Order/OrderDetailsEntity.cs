@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAS.Model.Model.Authentication;
 
 namespace DAS.Model.Model.Order
 {
@@ -32,7 +33,7 @@ namespace DAS.Model.Model.Order
 
 
         [ForeignKey("UserId")]
-        public UserEntity UserEntity { get; set; }
+        public LoginEntity UserEntity { get; set; }
 
         [ForeignKey("PaymentId")]
         public PaymentDetailsEntity PaymentDetails { get; set; }
