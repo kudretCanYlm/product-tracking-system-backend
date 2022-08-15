@@ -19,12 +19,17 @@ namespace DAS.Model.Model.Authentication
 
         }
 
-        public LoginEntity(string username,string password):base()
+        public LoginEntity(string name,string surname ,string email,string username,string password):base()
         {
+            this.Name = name;
+            this.Surname = surname;
+            this.Email = email;
             this.Username = username;
             this.Password = password;
         }
-
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Email { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public DateTime? CreatedAt { get; set; }
@@ -63,9 +68,12 @@ namespace DAS.Model.Model.Authentication
     {
         public LoginValidation()
         {
-            RuleFor(x => x.Username).Length(5, 50).NotEmpty().NotNull();
-            RuleFor(x => x.Password).Length(5, 50).NotEmpty().NotNull();
-            RuleFor(x => x.CreatedAt).NotEmpty().NotNull();
+            RuleFor(x => x.Name).Length(1, 50).NotEmpty().NotNull().WithMessage("name length must be 1-50");
+            RuleFor(x => x.Surname).Length(1, 50).NotEmpty().NotNull().WithMessage("surname length must be 1-50");
+            RuleFor(x => x.Email).Length(1, 50).NotEmpty().NotNull().WithMessage("email length must be 1-50");
+            RuleFor(x => x.Username).Length(5, 50).NotEmpty().NotNull().WithMessage("username length must be 1-50");
+            RuleFor(x => x.Password).Length(5, 50).NotEmpty().NotNull().WithMessage("password length must be 1-50");
+            RuleFor(x => x.CreatedAt).NotEmpty().NotNull().WithMessage("created at is not nullor empty");
         }
     }
 }
