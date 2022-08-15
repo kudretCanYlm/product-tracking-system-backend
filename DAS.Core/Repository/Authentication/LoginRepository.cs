@@ -12,12 +12,12 @@ namespace DAS.Core.Repository.Authentication
 
         public bool IsMailUsing(string email)
         {
-            return Get(x => x.Email == email) == default;
+            return Get(x => x.Email == email) != default;
         }
 
         public bool IsUsernameUsing(string  username)
         {
-            return Get(x => x.Username == username) == null;
+            return Get(x => x.Username == username) != null;
         }
     }
 
