@@ -14,3 +14,4 @@
 #### 5-login +
 #### 6-media
 #### 7-location
+### 3-apply automapper
