@@ -1,6 +1,7 @@
 ﻿using Api.Infrastructure.Attributes;
 using Api.Infrastructure.Jwt;
 using DAS.Model.Model.Enums;
+using DAS.Service.Services.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,19 +16,37 @@ namespace Api.Controllers
    public class User
     {
         public string Username { get; set; }
-        public string password { get; set; }
+        public string Password { get; set; }
     }
     [RoutePrefix("auth")]
     public class AuthController : ApiController
     {
-        [AllowAnonymous,Route("taketoken")]
-        public string Get([FromBody]User user)
+        ILoginService loginService;
+
+        public AuthController(ILoginService loginService)
         {
-            //user database control
-            return JwtManager.GenerateToken(user.Username,RoleEnum.Admin);
+            this.loginService = loginService;
         }
 
-        [Route("test"), JwtAuthentication(RoleEnum.Admin)]
+        [AllowAnonymous,Route("login")]
+        public HttpResponseMessage Get([FromBody]User user)
+        {
+            var userDb=loginService.LogIn(user.Username, user.Password);
+
+            if(userDb!=null)
+            {
+                var token = JwtManager.GenerateToken(userDb.Username, RoleEnum.Admin);
+
+                return Request.CreateResponse(HttpStatusCode.OK, token);
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Username or Password is wrong");
+            }
+                
+        }
+
+        [Route("getUsername"), JwtAuthentication(RoleEnum.Admin)]
         public HttpResponseMessage GetTest()
         {
             string name=ActionContext.RequestContext.Principal.Identity.Name;
