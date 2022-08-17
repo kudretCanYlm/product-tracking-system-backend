@@ -16,7 +16,8 @@ namespace DAS.Service.Services.Authentication
     public interface ILoginService
     {
         string AddNewUser(LoginEntity loginEntity);
-        LoginEntity GetUser(string username, string password);
+        LoginEntity LogIn(string username, string password);
+        void Savelogin();
         
     }
     public class LoginService:ILoginService
@@ -54,7 +55,7 @@ namespace DAS.Service.Services.Authentication
 
                 try
                 {
-                    unitOfWork.Commit();
+                    Savelogin();
                 }
                 catch (Exception ex)
                 {
@@ -73,10 +74,23 @@ namespace DAS.Service.Services.Authentication
             return errors.ToString();
         }
 
-        public LoginEntity GetUser(string username, string password)
+        public LoginEntity LogIn(string username, string password)
         {
-            //apply auto mapping
-            throw new NotImplementedException();
+            LoginEntity user = loginRepository.GetUser(username, password);
+
+            if (user.Name == null)
+                return null;
+
+            user.Password = "";
+
+
+            return user;
+            
+        }
+
+        public void Savelogin()
+        {
+            unitOfWork.Commit();
         }
     }
 }
