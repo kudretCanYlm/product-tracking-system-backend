@@ -31,6 +31,7 @@ namespace Api.Controllers
         [AllowAnonymous,Route("login")]
         public HttpResponseMessage Get([FromBody]User user)
         {
+            //will change by users role from db
             var userDb=loginService.LogIn(user.Username, user.Password);
 
             if(userDb!=null)
