@@ -17,7 +17,7 @@ namespace DAS.Service.Services.Authentication
     {
         string AddNewUser(LoginEntity loginEntity);
         LoginEntity LogIn(string username, string password);
-        void Savelogin();
+        Guid? GetUserId(string usernameMd5);
         
     }
     public class LoginService:ILoginService
@@ -74,6 +74,11 @@ namespace DAS.Service.Services.Authentication
             return errors.ToString();
         }
 
+        public Guid? GetUserId(string usernameMd5)
+        {
+            return loginRepository.Get(x => x.Username == usernameMd5).Id;
+        }
+
         public LoginEntity LogIn(string username, string password)
         {
             LoginEntity user = loginRepository.GetUser(username, password);
@@ -88,7 +93,7 @@ namespace DAS.Service.Services.Authentication
             
         }
 
-        public void Savelogin()
+        private void Savelogin()
         {
             unitOfWork.Commit();
         }
