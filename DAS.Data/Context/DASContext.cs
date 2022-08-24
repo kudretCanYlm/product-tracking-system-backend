@@ -47,7 +47,8 @@ namespace DAS.Data.Context
         public DbSet<CountryEntity> Country { get; set; }
         public DbSet<LoginEntity> Login { get; set; }
         public DbSet<UserAddressEntity> UserAddress { get; set; }
-        public DbSet<UserPaymentEntity> userPayment { get; set; }
+        public DbSet<UserPaymentEntity> UserPayment { get; set; }
+        public DbSet<ImageEntity> Image { get; set; }
         //public ImageEntity Image { get; set; }
         //public OrderDetailsEntity OrderDetails { get; set; }
         //public OrderItemsEntity OrderItems { get; set; }
