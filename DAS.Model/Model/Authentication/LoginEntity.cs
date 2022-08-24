@@ -35,7 +35,7 @@ namespace DAS.Model.Model.Authentication
         public DateTime? CreatedAt { get; set; }
         public DateTime? ModifiedAt { get ; set ; }
         public DateTime? DeletedAt { get; set ;}
-
+        //will add role
         //we will add recursive function
         public void CreateMD5ForUsernameAndPassword()
         {
