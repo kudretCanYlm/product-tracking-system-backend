@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Base\BaseEntity.cs" />
     <Compile Include="Base\Enums\DateTypesEnum.cs" />
+    <Compile Include="Base\Enums\ImageTypesEnum.cs" />
     <Compile Include="Base\Extensions\EntitiesExtensions.cs" />
     <Compile Include="Base\Interfaces\IBaseEntity.cs" />
     <Compile Include="Base\Interfaces\IBaseTimeEntity.cs" />
