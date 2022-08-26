@@ -1,6 +1,7 @@
 ﻿using DAS.Core.Infrastructure;
 using DAS.Core.Repository.Location;
 using DAS.Model.Model.Location;
+using DAS.Service.common;
 using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,6 @@ namespace DAS.Service.Services
         string AddCountry(CountryEntity countryEntity);
         string UpdateCountry(CountryEntity countryEntity);
         string DeleteCountry(CountryEntity countryEntity);
-        void SaveCountry();
     }
 
     public class CountryService : ICountyService
@@ -67,9 +67,8 @@ namespace DAS.Service.Services
 
         public string UpdateCountry (CountryEntity countryEntity)
         {
-            ValidationResult result = validator.Validate(countryEntity);
 
-            if (result.IsValid)
+            if (validator.IsValidEntity(countryEntity))
             {
                 countryRepository.Update(countryEntity);
 
@@ -86,12 +85,8 @@ namespace DAS.Service.Services
                 return "saved";
             }
 
-            StringBuilder errors = new StringBuilder();
 
-            foreach (var error in result.Errors)
-                errors.AppendLine(error.ErrorMessage);
-
-            return errors.ToString();
+            return validator.GetValidErrorMessages(countryEntity);
         }
 
         public IEnumerable<CountryEntity> GetCountries()
@@ -108,7 +103,7 @@ namespace DAS.Service.Services
             return countries;
         }
 
-        public void SaveCountry()
+        private void SaveCountry()
         {
             unitOfWork.Commit();
         }
