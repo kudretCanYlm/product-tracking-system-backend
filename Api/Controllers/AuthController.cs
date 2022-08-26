@@ -28,8 +28,8 @@ namespace Api.Controllers
             this.loginService = loginService;
         }
 
-        [AllowAnonymous,Route("login")]
-        public HttpResponseMessage Get([FromBody]User user)
+        [AllowAnonymous,Route("login"),HttpPost]
+        public HttpResponseMessage Login([FromBody]User user)
         {
             //will change by users role from db
             var userDb=loginService.LogIn(user.Username, user.Password);
