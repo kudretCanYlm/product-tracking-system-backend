@@ -3,6 +3,7 @@ using DAS.Core.Repository.Authentication;
 using DAS.Model.Base.Enums;
 using DAS.Model.Base.Extensions;
 using DAS.Model.Model.Authentication;
+using DAS.Service.common;
 using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
@@ -36,12 +37,11 @@ namespace DAS.Service.Services.Authentication
         {
             loginEntity.SetTimeNow(DateTypesEnum.CreatedAt);
             
-            ValidationResult result = validator.Validate(loginEntity);
+            
 
-            loginEntity.CreateMD5ForUsernameAndPassword();
-
-            if (result.IsValid)
+            if (validator.IsValidEntity(loginEntity))
             {
+                loginEntity.CreateMD5ForUsernameAndPassword();
                 bool isEmailUsing = loginRepository.IsMailUsing(loginEntity.Email);
                 bool isUsernameUsing = loginRepository.IsUsernameUsing(loginEntity.Username);
 
@@ -66,12 +66,7 @@ namespace DAS.Service.Services.Authentication
                 
             }
 
-            StringBuilder errors = new StringBuilder();
-
-            foreach (var error in result.Errors)
-                errors.AppendLine(error.ErrorMessage);
-
-            return errors.ToString();
+            return validator.GetValidErrorMessages(loginEntity);
         }
 
         public Guid? GetUserId(string usernameMd5)
