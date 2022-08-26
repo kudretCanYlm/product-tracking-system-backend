@@ -12,7 +12,6 @@ namespace DAS.Service.Services.Media
 {
     public interface IImageService
     {
-        void SaveImage();
         string AddImage(ImageEntity imageEntity);
         ImageEntity GetSingleGlobalImage(Guid ownerId, ImageTypesEnum imageType);
         IEnumerable<ImageEntity> GetMultipleGlobalImage(Guid ownerId, ImageTypesEnum imageTypes);
@@ -76,7 +75,7 @@ namespace DAS.Service.Services.Media
             return imageRepository.GetMany(x => x.OwnerId == ownerId && x.ImageType == imageTypes && x.IsPublic == false);
         }
 
-        public void SaveImage()
+        private void SaveImage()
         {
             unitOfWork.Commit();
         }
