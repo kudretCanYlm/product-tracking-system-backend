@@ -1,5 +1,6 @@
 ﻿using DAS.Data.Migrations;
 using DAS.Model.Model.Authentication;
+using DAS.Model.Model.Company;
 using DAS.Model.Model.Location;
 using DAS.Model.Model.Media;
 using DAS.Model.Model.Order;
@@ -49,6 +50,9 @@ namespace DAS.Data.Context
         public DbSet<UserAddressEntity> UserAddress { get; set; }
         public DbSet<UserPaymentEntity> UserPayment { get; set; }
         public DbSet<ImageEntity> Image { get; set; }
+        public DbSet<CompanyEntity> Company { get; set; }
+        public DbSet<CompanyWorkersEntity> CompanyWorkers { get; set; }
+        public DbSet<WorkerRoleEntity> WorkerRole { get; set; }
         //public ImageEntity Image { get; set; }
         //public OrderDetailsEntity OrderDetails { get; set; }
         //public OrderItemsEntity OrderItems { get; set; }
