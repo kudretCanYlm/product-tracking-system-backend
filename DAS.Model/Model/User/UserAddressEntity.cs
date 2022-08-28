@@ -30,7 +30,7 @@ namespace DAS.Model.Model.User
         public Guid UserId { get; set; }
 
         [ForeignKey("UserId")]
-        public LoginEntity LoginEntity { get; set; }
+        public LoginEntity Login { get; set; }
         [ForeignKey("CityId")]
         public CityEntity City { get; set; }
         [ForeignKey("CountryId")]
@@ -41,10 +41,12 @@ namespace DAS.Model.Model.User
     {
         public UserAddressValidation()
         {
-            RuleFor(x => x.AddressLine_1).Length(5,500);
+            RuleFor(x => x.AddressLine_1).Length(5,500).NotNull().NotEmpty();
             RuleFor(x => x.PostalCode).NotNull().NotEmpty();
-            RuleFor(x => x.Mobile).Length(15);
-
+            RuleFor(x => x.Mobile).Length(15).NotNull().NotEmpty();
+            RuleFor(x => x.Login).SetValidator(new LoginValidation());
+            RuleFor(x => x.City).SetValidator(new CityValidation());
+            RuleFor(x => x.Country).SetValidator(new CountryValidation());
         }
     }
 }
