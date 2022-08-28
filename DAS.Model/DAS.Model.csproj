@@ -71,6 +71,9 @@
     <Compile Include="Base\Interfaces\IBaseEntity.cs" />
     <Compile Include="Base\Interfaces\IBaseTimeEntity.cs" />
     <Compile Include="Model\Authentication\LoginEntity.cs" />
+    <Compile Include="Model\Company\CompanyEntity.cs" />
+    <Compile Include="Model\Company\CompanyWorkersEntity.cs" />
+    <Compile Include="Model\Company\WorkerRoleEntity.cs" />
     <Compile Include="Model\Enums\PaymentEnum.cs" />
     <Compile Include="Model\Enums\RoleEnum.cs" />
     <Compile Include="Model\Location\CityEntity.cs" />
