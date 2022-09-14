@@ -64,6 +64,11 @@
     <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Authentication\LoginRepository.cs" />
+    <Compile Include="Repository\Chat\ChatRepository.cs" />
+    <Compile Include="Repository\Chat\MessageRepository.cs" />
+    <Compile Include="Repository\Company\CompanyRepository.cs" />
+    <Compile Include="Repository\Company\CompanyWorkersRepository.cs" />
+    <Compile Include="Repository\Company\WorkerRoleRepository.cs" />
     <Compile Include="Repository\Location\CountryRepository.cs" />
     <Compile Include="Repository\Media\ImageRepository.cs" />
   </ItemGroup>

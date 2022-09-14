@@ -71,6 +71,8 @@
     <Compile Include="Base\Interfaces\IBaseEntity.cs" />
     <Compile Include="Base\Interfaces\IBaseTimeEntity.cs" />
     <Compile Include="Model\Authentication\LoginEntity.cs" />
+    <Compile Include="Model\Chat\ChatEntity.cs" />
+    <Compile Include="Model\Chat\MessageEntity.cs" />
     <Compile Include="Model\Company\CompanyEntity.cs" />
     <Compile Include="Model\Company\CompanyWorkersEntity.cs" />
     <Compile Include="Model\Company\WorkerRoleEntity.cs" />
