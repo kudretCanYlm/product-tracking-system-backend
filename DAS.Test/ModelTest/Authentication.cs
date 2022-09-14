@@ -78,6 +78,9 @@ namespace DAS.Test.ModelTest
             loginEntity.CreatedAt = DateTime.Now;
             loginEntity.Username = "kudret123";
             loginEntity.Password = "kudret123";
+            loginEntity.Email = "kudret123@gmail.com";
+            loginEntity.Name = "Kudret Can";
+            loginEntity.Surname = "Yalım";
 
             //act
             var result = validator.TestValidate(loginEntity);
