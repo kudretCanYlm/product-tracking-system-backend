@@ -27,7 +27,11 @@ namespace DAS.Model.Model.Company
         public DateTime? DeletedAt { get; set; }
     }
 
-    public class WorkerRoleValidation : AbstractValidator<WorkerRoleEntity>
+    public interface IWorkerRoleValidation : IValidator<WorkerRoleEntity>
+    {
+
+    }
+    public class WorkerRoleValidation : AbstractValidator<WorkerRoleEntity>,IWorkerRoleValidation
     {
         public WorkerRoleValidation()
         {
