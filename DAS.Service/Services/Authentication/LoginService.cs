@@ -4,6 +4,7 @@ using DAS.Model.Base.Enums;
 using DAS.Model.Base.Extensions;
 using DAS.Model.Model.Authentication;
 using DAS.Service.common;
+using FluentValidation;
 using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
@@ -25,12 +26,14 @@ namespace DAS.Service.Services.Authentication
     {
         private readonly ILoginRepository loginRepository;
         private readonly IUnitOfWork unitOfWork;
-        private readonly LoginValidation validator = new LoginValidation();
+        private readonly ILoginValidation validator;
 
-        public LoginService(ILoginRepository loginRepository,IUnitOfWork unitOfWork)
+
+        public LoginService(ILoginRepository loginRepository,IUnitOfWork unitOfWork,ILoginValidation validator)
         {
             this.loginRepository = loginRepository;
             this.unitOfWork = unitOfWork;
+            this.validator = validator;
         }
 
         public string AddNewUser(LoginEntity loginEntity)
