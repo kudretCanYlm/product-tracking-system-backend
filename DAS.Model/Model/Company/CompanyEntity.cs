@@ -34,7 +34,12 @@ namespace DAS.Model.Model.Company
         public LoginEntity CompanyOwner { get; set; }
     }
 
-    public class CompanyValidation : AbstractValidator<CompanyEntity>
+    public interface ICompanyValidation : IValidator<CompanyEntity>
+    {
+
+    }
+
+    public class CompanyValidation : AbstractValidator<CompanyEntity>,ICompanyValidation
     {
         public CompanyValidation()
         {
