@@ -12,14 +12,14 @@ using System.Threading.Tasks;
 
 namespace DAS.Model.Model.Authentication
 {
-    public class LoginEntity:BaseEntity,IBaseTimeEntity
+    public class LoginEntity : BaseEntity, IBaseTimeEntity
     {
-        public LoginEntity():base()
+        public LoginEntity() : base()
         {
 
         }
 
-        public LoginEntity(string name,string surname ,string email,string username,string password):base()
+        public LoginEntity(string name, string surname, string email, string username, string password) : base()
         {
             this.Name = name;
             this.Surname = surname;
@@ -33,8 +33,8 @@ namespace DAS.Model.Model.Authentication
         public string Username { get; set; }
         public string Password { get; set; }
         public DateTime? CreatedAt { get; set; }
-        public DateTime? ModifiedAt { get ; set ; }
-        public DateTime? DeletedAt { get; set ;}
+        public DateTime? ModifiedAt { get; set; }
+        public DateTime? DeletedAt { get; set; }
         //will add role
         //we will add recursive function
         public void CreateMD5ForUsernameAndPassword()
@@ -64,16 +64,44 @@ namespace DAS.Model.Model.Authentication
         }
     }
 
-    public class LoginValidation:AbstractValidator<LoginEntity>
+    public interface ILoginValidation : IValidator<LoginEntity>
+    {
+
+    }
+
+    public class LoginValidation : AbstractValidator<LoginEntity>,ILoginValidation
     {
         public LoginValidation()
         {
-            RuleFor(x => x.Name).Length(1, 50).NotEmpty().NotNull().WithMessage("name length must be 1-50");
-            RuleFor(x => x.Surname).Length(1, 50).NotEmpty().NotNull().WithMessage("surname length must be 1-50");
-            RuleFor(x => x.Email).Length(1, 50).NotEmpty().NotNull().WithMessage("email length must be 1-50");
-            RuleFor(x => x.Username).Length(5, 50).NotEmpty().NotNull().WithMessage("username length must be 1-50");
-            RuleFor(x => x.Password).Length(5, 50).NotEmpty().NotNull().WithMessage("password length must be 1-50");
-            RuleFor(x => x.CreatedAt).NotEmpty().NotNull().WithMessage("created at is not nullor empty");
+            RuleFor(x => x.Name).Length(1, 50)
+                .WithMessage("name length must be 1-50")
+                .NotEmpty().WithMessage("don't be empty")
+                .NotNull().WithMessage("don't be null ");
+
+            RuleFor(x => x.Surname)
+                .Length(1, 50).WithMessage("surname length must be 1-50")
+                .NotEmpty().WithMessage("don't be empty")
+                .NotNull().WithMessage("don't be null ");
+
+            RuleFor(x => x.Email)
+                .Length(1, 50).WithMessage("email length must be 1-50")
+                .NotEmpty().WithMessage("don't be empty")
+                .NotNull().WithMessage("don't be null ");
+
+            RuleFor(x => x.Username)
+                .Length(5, 50).WithMessage("username length must be 1-50")
+                .NotEmpty().WithMessage("don't be empty")
+                .NotNull().WithMessage("don't be null ");
+
+            RuleFor(x => x.Password)
+                .Length(5, 50)
+                .NotEmpty().WithMessage("don't be empty")
+                .NotNull().WithMessage("don't be null ")
+                .WithMessage("password length must be 1-50");
+
+            RuleFor(x => x.CreatedAt)
+                .NotEmpty().WithMessage("don't be empty")
+                .NotNull().WithMessage("don't be null ");
         }
     }
 }
