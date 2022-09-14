@@ -9,7 +9,9 @@ using Autofac;
 using Autofac.Integration.WebApi;
 using DAS.Core.Infrastructure;
 using DAS.Core.Repository.Location;
+using DAS.Model.Model.Authentication;
 using DAS.Service.Services;
+using FluentValidation;
 
 namespace Api.App_Start
 {
@@ -38,10 +40,12 @@ namespace Api.App_Start
            .Where(t => t.Name.EndsWith("Service"))
            .AsImplementedInterfaces().InstancePerApiRequest();
 
+            builder.RegisterAssemblyTypes(typeof(LoginValidation).Assembly)
+            .Where(t => t.Name.EndsWith("Validation"))
+            .AsImplementedInterfaces().InstancePerApiRequest();
 
-
-
-            //wii add after owin
+            
+            //will add after owin
             /*builder.RegisterAssemblyTypes(typeof(DefaultFormsAuthentication).Assembly)
          .Where(t => t.Name.EndsWith("Authentication"))
          .AsImplementedInterfaces().InstancePerHttpRequest();
