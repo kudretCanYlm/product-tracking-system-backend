@@ -29,17 +29,23 @@ namespace DAS.Model.Model.Location
         public string CountryCode { get; set; }
     }
 
-    public class CountryValidation : AbstractValidator<CountryEntity>
+    public interface ICountryValidation : IValidator<CountryEntity>
+    {
+
+    }
+
+    public class CountryValidation : AbstractValidator<CountryEntity>,ICountryValidation
     {
         public CountryValidation()
         {
-            RuleFor(x => x.CountryName).Length(5, 50).
-                NotNull().
-                WithMessage("Country name length must be between 5-50").
-                NotEmpty().
-                WithMessage("Country name length must be between 5-50");
+            RuleFor(x => x.CountryName)
+                .Length(5, 50).WithMessage("name length must be 5-50")
+                .NotNull().WithMessage("don't be null")
+                .NotEmpty().WithMessage("don't be empty");
 
-            RuleFor(x => x.CountryCode).NotEmpty().NotNull().WithMessage("Country code not null or empty");
+            RuleFor(x => x.CountryCode)
+                .NotEmpty().WithMessage("don't be empty")
+                .NotNull().WithMessage("don't be null");
         }
     }
 }
