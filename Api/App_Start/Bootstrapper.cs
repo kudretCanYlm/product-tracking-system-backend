@@ -10,7 +10,7 @@ using Autofac.Integration.WebApi;
 using DAS.Core.Infrastructure;
 using DAS.Core.Repository.Location;
 using DAS.Model.Model.Authentication;
-using DAS.Service.Services;
+using DAS.Service.Services.Location;
 using FluentValidation;
 
 namespace Api.App_Start
