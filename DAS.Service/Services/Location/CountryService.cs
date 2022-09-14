@@ -10,7 +10,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAS.Service.Services
+namespace DAS.Service.Services.Location
 {
     public interface ICountyService
     {
@@ -26,13 +26,13 @@ namespace DAS.Service.Services
     {
         private readonly ICountryRepository countryRepository;
         private readonly IUnitOfWork unitOfWork;
-        private readonly CountryValidation validator = new CountryValidation();
+        private readonly ICountryValidation validator;
 
-
-        public CountryService(ICountryRepository countryRepository,IUnitOfWork unitOfWork)
+        public CountryService(ICountryRepository countryRepository,IUnitOfWork unitOfWork,ICountryValidation validator)
         {
             this.countryRepository = countryRepository;
             this.unitOfWork = unitOfWork;
+            this.validator = validator;
         }
 
         public string AddCountry(CountryEntity countryEntity)
