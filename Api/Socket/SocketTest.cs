@@ -2,11 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 
 namespace Api.Socket
 {
-    public class ChatSocketHandler:WebSocketHandler
+    public interface IChatSocketHandler
+    {
+
+    }
+    public class ChatSocketHandler : WebSocketHandler
     {
         public class UserModel
         {
@@ -17,44 +22,108 @@ namespace Api.Socket
 
         }
 
-        private static WebSocketCollection clients = new WebSocketCollection();
+        private static WebSocketCollection all_clients = new WebSocketCollection();
+        private static Dictionary<string, WebSocketCollection> clients_list = new Dictionary<string, WebSocketCollection>();
+
+
         private UserModel connectedUser = new UserModel();
 
         public ChatSocketHandler(string username)
         {
             this.connectedUser.UserName = username;
+           // this.connectedUser.UserId = this.WebSocketContext.Headers["userId"];
         }
+
+        public void CreateNewChannel()
+        {
+
+        }
+
+        public void LoadOldChannel()
+        {
+
+        }
+
+        private void AddUsersToChannel()
+        {
+
+        }
+
+
 
         public override void OnOpen()
         {
             //this.connectedUser.UserName = this.WebSocketContext.QueryString["UserName"];
-            clients.Add(this);
-            OnMessage("ConnectedUserList#" + this.GetConnectedUserListJson(clients));
+
+            string channel = this.WebSocketContext.Headers["channel"].ToString();
+            all_clients.Add(this);
+
+            //clients.Add(this);
+            //clients.Broadcast(this.WebSocketContext.QueryString["UserName"] + " katıldı");
+            //  clients.Broadcast(this.WebSocketContext.AnonymousID);
+
+
+            if (!clients_list.Keys.Contains(channel))
+            {
+                //clients.Broadcast("kanal: " + this.WebSocketContext.Headers["kanal"]);
+                WebSocketCollection clients = new WebSocketCollection();
+                
+                clients.Add(this);
+
+                clients_list.Add(channel, clients);
+
+                var clients_new = clients_list.Where(x => x.Key == channel).FirstOrDefault().Value;
+                clients_new.Broadcast(channel + " oluşturukdu");
+            }
+            else
+            {
+                //auth control
+                clients_list.Where(x => x.Key == channel).FirstOrDefault().Value.Add(this);
+
+                var clients = clients_list.Where(x => x.Key == channel).FirstOrDefault().Value;
+
+                clients.Broadcast(this.WebSocketContext.QueryString["UserName"] + " katıldı");
+                clients.Broadcast("toplam kişi: " + clients.Count());
+
+            }
+
+            //OnMessage("ConnectedUserList#" + this.GetConnectedUserListJson(clients));
         }
 
         public override void OnMessage(string message)
         {
-            if (message.Contains("ConnectedUserList"))
-            {
-                clients.Broadcast(message);
-            }
-            else
-                clients.Broadcast(string.Format("{0}|{1}", this.connectedUser.UserName, message));
+            string channel = this.WebSocketContext.Headers["channel"].ToString();
 
-            //int test = 0;
-            //while (test < 5)
-            //{
-            //    test++;
-            //    clients.Broadcast("Selamlar test değişkeni = " + test.ToString());            
-            //    Thread.Sleep(5000);
-            //}
+            if (clients_list.Keys.Contains(channel))
+            {
+                var clients = clients_list.Where(x => x.Key == channel).FirstOrDefault().Value;
+                clients.Broadcast(string.Format("{0} = {1}", this.connectedUser.UserName, message));
+            }
+
         }
+
+        //public override void OnError()
+        //{
+
+        //    clients.Broadcast("error");
+        //}
 
         public override void OnClose()
         {
-            clients.Remove(this);
-            OnMessage("ConnectedUserList#" + this.GetConnectedUserListJson(clients));
-            clients.Broadcast(string.Format("{0}|çıkış yaptı.", this.connectedUser.UserName));
+            string channel = this.WebSocketContext.Headers["channel"].ToString();
+
+            clients_list.Where(x => x.Key == channel).FirstOrDefault().Value.Remove(this);
+
+            int onlineCount = clients_list.Where(x => x.Key == channel).FirstOrDefault().Value.Count;
+
+            if (onlineCount== 0)
+            {
+                clients_list.Remove(channel);
+            }
+            else
+            {
+                clients_list.Where(x => x.Key == channel).FirstOrDefault().Value.Broadcast(this.connectedUser.UserName + " ayrıldı. Kalan kişi: " + onlineCount);
+            }
         }
 
         /// <summary>
