@@ -29,7 +29,12 @@ namespace DAS.Model.Model.Company
         public WorkerRoleEntity WorkerRole { get; set; }
     }
 
-    public class CompanyWorkerValidation : AbstractValidator<CompanyWorkersEntity>
+    public interface ICompanyWorkerValidation : IValidator<CompanyWorkersEntity>
+    {
+
+    }
+
+    public class CompanyWorkerValidation : AbstractValidator<CompanyWorkersEntity>,ICompanyWorkerValidation
     {
         public CompanyWorkerValidation()
         {
