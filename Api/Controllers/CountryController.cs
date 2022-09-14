@@ -1,7 +1,7 @@
 ﻿using Api.Infrastructure.Attributes;
 using DAS.Model.Model.Enums;
 using DAS.Model.Model.Location;
-using DAS.Service.Services;
+using DAS.Service.Services.Location;
 using System;
 using System.Collections.Generic;
 using System.Linq;
