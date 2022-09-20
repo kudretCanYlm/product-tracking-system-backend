@@ -43,6 +43,16 @@ namespace DAS.Core.Infrastructure
             dbset.Attach(entity);
             DasContext.Entry(entity).State = EntityState.Modified;
         }
+
+        public virtual void UpdateMany(IEnumerable<T> entities)
+        {
+            foreach (var entity in entities)
+            {
+                dbset.Attach(entity);
+                DasContext.Entry(entity).State = EntityState.Modified;
+            }
+        }
+
         public virtual void Delete(T entity)
         {
             dbset.Remove(entity);
