@@ -226,6 +226,7 @@
     <Compile Include="App_Start\BrowserJsonFormatter.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\MediaController.cs" />
     <Compile Include="Controllers\SocketController.cs" />
@@ -247,8 +248,10 @@
     <Compile Include="Infrastructure\Attributes\JwtAuthenticationAttribute.cs" />
     <Compile Include="Infrastructure\Jwt\JwtManager.cs" />
     <Compile Include="Mappings\EntityToView.cs" />
+    <Compile Include="Mappings\ViewToEntity.cs" />
+    <Compile Include="Models\Chat\MessageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Socket\SocketTest.cs" />
+    <Compile Include="Socket\ChatSocket.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
@@ -263,7 +266,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\ViewModels\" />
     <Folder Include="ViewModels\User\" />
   </ItemGroup>
   <ItemGroup>
