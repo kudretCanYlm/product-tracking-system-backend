@@ -20,6 +20,8 @@ namespace DAS.Service.Services.Authentication
         string AddNewUser(LoginEntity loginEntity);
         LoginEntity LogIn(string username, string password);
         Guid? GetUserId(string usernameMd5);
+
+        LoginEntity GetUser(Expression<Func<LoginEntity, bool>> where);
         
     }
     public class LoginService:ILoginService
@@ -70,6 +72,11 @@ namespace DAS.Service.Services.Authentication
             }
 
             return validator.GetValidErrorMessages(loginEntity);
+        }
+
+        public LoginEntity GetUser(Expression<Func<LoginEntity, bool>> where)
+        {
+            return loginRepository.Get(where);
         }
 
         public Guid? GetUserId(string usernameMd5)
