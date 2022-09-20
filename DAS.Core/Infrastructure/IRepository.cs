@@ -13,6 +13,7 @@ namespace DAS.Core.Infrastructure
     {
         void Add(T entity);
         void Update(T entity);
+        void UpdateMany(IEnumerable<T> entities);
         void Delete(T entity);
         void Delete(Expression<Func<T, bool>> where);
         T GetById(Guid id);
