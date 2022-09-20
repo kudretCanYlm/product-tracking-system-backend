@@ -1,4 +1,4 @@
-﻿using Api.Infrastructure.Attributes;
+﻿    using Api.Infrastructure.Attributes;
 using Api.Socket;
 using Microsoft.Web.WebSockets;
 using System;
@@ -11,27 +11,28 @@ using System.Web.Http;
 
 namespace Api.Controllers
 {
-
-    [AllowAnonymous,RoutePrefix("socket")]
+    [RoutePrefix("socket")]
     public class SocketController : ApiController
     {
-        [CacheControl,Route("test"),AcceptVerbs("GET", "POST"),AllowAnonymous]
-        public HttpResponseMessage Get(string username)
+
+        private ChatSocketHandler chatSocketHandler = new ChatSocketHandler();
+
+        [Route("test"), AcceptVerbs("GET", "POST"), AllowAnonymous]
+        public HttpResponseMessage ConnectSocket()
         {
             if (!HttpContext.Current.IsWebSocketRequest)
-                return new HttpResponseMessage(HttpStatusCode.MethodNotAllowed);
-            HttpContext.Current.AcceptWebSocketRequest(new ChatSocketHandler(username));
+                return Request.CreateResponse(HttpStatusCode.BadRequest,"Socket değil!");
+
+            HttpContext.Current.AcceptWebSocketRequest(chatSocketHandler);
             return Request.CreateResponse(HttpStatusCode.SwitchingProtocols);
-            
+           
+        }
+
+        [Route("control"),AllowAnonymous, AcceptVerbs("GET", "POST")]
+        public string Test()
+        {
+            return "alive";
         }
     }
-
-    public class Item
-    {
-        public string Id { get; set; }
-        public string Text { get; set; }
-        public string Description { get; set; }
-    }
-
 
 }
