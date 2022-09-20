@@ -5,8 +5,10 @@ using System.Reflection;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
+using Api.Mappings;
 using Autofac;
 using Autofac.Integration.WebApi;
+using AutoMapper;
 using DAS.Core.Infrastructure;
 using DAS.Core.Repository.Location;
 using DAS.Model.Model.Authentication;
@@ -19,10 +21,18 @@ namespace Api.App_Start
     {
         public static void Run()
         {
+            AutoMapperConfiguration();
             SetAutofacContainer();
         }
+        private static void AutoMapperConfiguration()
+        {
+            Mapper.Initialize(x =>
+            {
+                x.AddProfile<EntityToView>();
+                x.AddProfile<ViewToEntity>();
+            });
+        }
 
-        
         private static void SetAutofacContainer()
         {
             var builder = new ContainerBuilder();
