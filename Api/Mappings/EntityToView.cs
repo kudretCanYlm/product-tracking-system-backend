@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using Api.Models.Chat;
+using AutoMapper;
+using DAS.Model.Model.Chat;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +14,12 @@ namespace Api.Mappings
 
         protected override void Configure()
         {
-            //https://github.com/MarlabsInc/SocialGoal/blob/master/source/SocialGoal/Mappings/DomainToViewModelMappingProfile.cs
-            // Mapper.CreateMap<>
-            base.Configure();
+            Mapper.CreateMap<MessageEntity, MessageViewModel>()
+                .ForMember(x => x.Id, act => act.MapFrom(x => x.Id))
+                .ForMember(x => x.Message, act => act.MapFrom(x => x.Message))
+                .ForMember(x=>x.Name,act=>act.MapFrom(x=>x.User.Name+" "+x.User.Surname))
+                .ForMember(x => x.UserId, act => act.MapFrom(x => x.UserId))
+                .ForMember(x => x.CreatedAt, act => act.MapFrom(x => x.CreatedAt));
         }
     }
 }
