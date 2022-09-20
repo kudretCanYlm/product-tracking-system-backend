@@ -19,6 +19,7 @@ namespace DAS.Model.Model.Chat
         }
 
         public string Message { get; set; }
+        public bool IsViewed { get; set; } = true;
         public Guid UserId { get; set; }
         public Guid ChatId { get; set; }
         public DateTime? CreatedAt { get ; set ; }
