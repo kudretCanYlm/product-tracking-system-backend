@@ -71,26 +71,16 @@ namespace Api.Controllers
             var userId = loginService.GetUserId(name);
             var userSecondId = Guid.Parse(getMessage.TargetUserId);
 
-            var messages = messageService
+            var messages = Mapper.Map<IEnumerable<MessageEntity>, IEnumerable<MessageViewModel>>(messageService
                 .GetMessages(
                 x => x.UserId == userId
                 &&
-                (x.Chat.UserFirstId == userSecondId || x.Chat.UserSecondId == userSecondId));
-
-            var messagesView = new List<MessageViewModel>();
-
-
+                (x.Chat.UserFirstId == userSecondId || x.Chat.UserSecondId == userSecondId)));
 
             if (messages == null)
                 return Request.CreateResponse(HttpStatusCode.Accepted, "There isn't any message");
 
-            foreach (var message in messages)
-            {
-                messagesView.Add(Mapper.Map<MessageEntity, MessageViewModel>(message));
-            }
-
-
-            return Request.CreateResponse(HttpStatusCode.OK, messagesView);
+            return Request.CreateResponse(HttpStatusCode.OK, messages);
         }
 
         [Route("sendMessage"), JwtAuthentication(RoleEnum.Admin), HttpPost]
