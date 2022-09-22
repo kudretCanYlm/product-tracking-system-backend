@@ -17,7 +17,7 @@ namespace DAS.Service.Services.Authentication
 {
     public interface ILoginService
     {
-        string AddNewUser(LoginEntity loginEntity);
+        object AddNewUser(LoginEntity loginEntity);
         LoginEntity LogIn(string username, string password);
         Guid? GetUserId(string usernameMd5);
 
@@ -38,12 +38,10 @@ namespace DAS.Service.Services.Authentication
             this.validator = validator;
         }
 
-        public string AddNewUser(LoginEntity loginEntity)
+        public object AddNewUser(LoginEntity loginEntity)
         {
             loginEntity.SetTimeNow(DateTypesEnum.CreatedAt);
             
-            
-
             if (validator.IsValidEntity(loginEntity))
             {
                 loginEntity.CreateMD5ForUsernameAndPassword();
@@ -67,7 +65,7 @@ namespace DAS.Service.Services.Authentication
                     return ex.Message;
                 }
 
-                return "New user added as successfuly";
+                return true;
                 
             }
 
