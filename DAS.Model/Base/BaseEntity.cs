@@ -16,7 +16,7 @@ namespace DAS.Model.Base
                 Id = Guid.NewGuid();
         }
 
-        [Key,DataMember]
+        [Key]
         public Guid Id { get; set; } 
     }
 }

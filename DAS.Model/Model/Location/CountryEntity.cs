@@ -23,9 +23,7 @@ namespace DAS.Model.Model.Location
                 this.CountryName = countryName;
                 this.CountryCode = countryCode;
         }
-        [DataMember]
         public string CountryName { get; set; }
-        [DataMember]
         public string CountryCode { get; set; }
     }
 
