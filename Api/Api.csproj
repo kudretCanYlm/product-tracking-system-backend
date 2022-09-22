@@ -249,7 +249,9 @@
     <Compile Include="Infrastructure\Jwt\JwtManager.cs" />
     <Compile Include="Mappings\EntityToView.cs" />
     <Compile Include="Mappings\ViewToEntity.cs" />
+    <Compile Include="Models\Authentication\LoginModel.cs" />
     <Compile Include="Models\Chat\MessageModel.cs" />
+    <Compile Include="Models\Location\CountryModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Socket\ChatSocket.cs" />
   </ItemGroup>
