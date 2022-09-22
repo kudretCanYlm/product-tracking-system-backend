@@ -1,4 +1,6 @@
 ﻿using Api.Infrastructure.Attributes;
+using Api.Models.Location;
+using AutoMapper;
 using DAS.Model.Model.Enums;
 using DAS.Model.Model.Location;
 using DAS.Service.Services.Location;
@@ -25,26 +27,28 @@ namespace Api.Controllers
         [CacheControl]
         public HttpResponseMessage Get()
         {
-            var values = countyService.GetCountries();
+            var values = Mapper.Map<IEnumerable<CountryEntity>,IEnumerable< CountryViewModel>> (countyService.GetCountries());
 
             return Request.CreateResponse(HttpStatusCode.OK, values);
         }
-        [CacheControl]
+        [HttpGet,CacheControl]
         public HttpResponseMessage Get([FromUri] Guid id)
         {
-            var values = countyService.GetCountriesWithFilter(x => x.Id == id);
+            var values = Mapper.Map<IEnumerable<CountryEntity>,IEnumerable<CountryViewModel>>(countyService.GetCountriesWithFilter(x => x.Id == id));
 
             return Request.CreateResponse(HttpStatusCode.OK, values);
         }
 
-        public HttpResponseMessage Post([FromBody] CountryEntity value)
+        [Route("add")]
+        public HttpResponseMessage Post([FromBody] CountryPostModel value)
         {
-            string message = countyService.AddCountry(value);
+            string message = countyService.AddCountry(Mapper.Map<CountryPostModel,CountryEntity>(value));
 
             return Request.CreateResponse(HttpStatusCode.OK, message);
         }
 
-        public HttpResponseMessage Put([FromUri] Guid id, [FromBody] CountryEntity countryUpdate)
+        [Route("update/{id}"),HttpPut]
+        public HttpResponseMessage Put([FromUri] Guid id, [FromBody] CountryPostModel countryUpdate)
         {
             var country = countyService.GetSingleCountry(id);
 
@@ -52,8 +56,9 @@ namespace Api.Controllers
             {
                 if(countryUpdate!=null)
                 {
-                    country.CountryName = countryUpdate.CountryName;
-                    country.CountryCode = countryUpdate.CountryCode;
+
+                    country.CountryName = countryUpdate?.CountryName;
+                    country.CountryCode = countryUpdate?.CountryCode;
 
                     string message = countyService.UpdateCountry(country);
 
@@ -67,6 +72,7 @@ namespace Api.Controllers
             return Request.CreateResponse(HttpStatusCode.BadRequest, "not find country");
         }
 
+        [Route("delete/{id}")]
         public HttpResponseMessage Delete([FromUri] Guid id)
         {
             var country = countyService.GetSingleCountry(id);
