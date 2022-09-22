@@ -1,4 +1,6 @@
 ﻿using Api.Infrastructure.Attributes;
+using Api.Models.Authentication;
+using AutoMapper;
 using DAS.Model.Model.Authentication;
 using DAS.Model.Model.Enums;
 using DAS.Service.Services.Authentication;
@@ -21,12 +23,12 @@ namespace Api.Controllers
             this.loginService = loginService;
         }
         [Route("adduser"),AllowAnonymous,HttpPost]
-        public HttpResponseMessage AddNewUser([FromBody] LoginEntity loginEntity)
+        public HttpResponseMessage AddNewUser([FromBody] LoginPostModelNewUser loginEntity)
         {
-          string result= loginService.AddNewUser(loginEntity);
+          object result= loginService.AddNewUser(Mapper.Map<LoginPostModelNewUser,LoginEntity>(loginEntity));
 
-            if (result == "New user added as successfuly")
-                return Request.CreateResponse(HttpStatusCode.Accepted, result);
+            if (result is true)
+                return Request.CreateResponse(HttpStatusCode.Accepted, "New user added as successfuly");
             else
                 return Request.CreateResponse(HttpStatusCode.BadRequest, result);
         }
