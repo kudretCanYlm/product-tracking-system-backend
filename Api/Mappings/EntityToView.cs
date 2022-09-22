@@ -1,6 +1,8 @@
 ﻿using Api.Models.Chat;
+using Api.Models.Location;
 using AutoMapper;
 using DAS.Model.Model.Chat;
+using DAS.Model.Model.Location;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +22,11 @@ namespace Api.Mappings
                 .ForMember(x=>x.Name,act=>act.MapFrom(x=>x.User.Name+" "+x.User.Surname))
                 .ForMember(x => x.UserId, act => act.MapFrom(x => x.UserId))
                 .ForMember(x => x.CreatedAt, act => act.MapFrom(x => x.CreatedAt));
+
+            Mapper.CreateMap<CountryEntity, CountryViewModel>()
+                .ForMember(x => x.Id, act => act.MapFrom(x => x.Id))
+                .ForMember(x => x.CountryName, act => act.MapFrom(x => x.CountryName))
+                .ForMember(x => x.CountryCode, act => act.MapFrom(x => x.CountryCode));
         }
     }
 }
