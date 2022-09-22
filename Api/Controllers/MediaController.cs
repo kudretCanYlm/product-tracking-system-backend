@@ -73,7 +73,7 @@ namespace Api.Controllers
             return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "not working");
         }
 
-        [Route("getSingleGlobalImage"), HttpPost,JwtAuthentication(RoleEnum.Admin)]
+        [Route("getSingleGlobalImage"), HttpPost,JwtAuthentication(RoleEnum.Admin), CacheControl]
         public HttpResponseMessage GetSingle([FromBody] ImageGetView imageGetView)
         {
             var imageDb = imageService.GetSingleGlobalImage(imageGetView.OwnerId, imageGetView.ImageType);
