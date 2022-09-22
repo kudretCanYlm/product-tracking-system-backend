@@ -1,5 +1,8 @@
 ﻿using Api.Infrastructure.Attributes;
 using Api.Infrastructure.Jwt;
+using Api.Models.Authentication;
+using AutoMapper;
+using DAS.Model.Model.Authentication;
 using DAS.Model.Model.Enums;
 using DAS.Service.Services.Authentication;
 using System;
@@ -13,11 +16,7 @@ using System.Web.Http.Routing;
 
 namespace Api.Controllers
 {
-   public class User
-    {
-        public string Username { get; set; }
-        public string Password { get; set; }
-    }
+
     [RoutePrefix("auth")]
     public class AuthController : ApiController
     {
@@ -29,10 +28,10 @@ namespace Api.Controllers
         }
 
         [AllowAnonymous,Route("login"),HttpPost]
-        public HttpResponseMessage Login([FromBody]User user)
+        public HttpResponseMessage Login([FromBody]LoginPostModel user)
         {
             //will change by users role from db
-            var userDb=loginService.LogIn(user.Username, user.Password);
+            var userDb=loginService.LogIn(user.Username,user.Password);
 
             if(userDb!=null)
             {
