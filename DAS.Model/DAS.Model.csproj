@@ -70,6 +70,10 @@
     <Compile Include="Base\Extensions\EntitiesExtensions.cs" />
     <Compile Include="Base\Interfaces\IBaseEntity.cs" />
     <Compile Include="Base\Interfaces\IBaseTimeEntity.cs" />
+    <Compile Include="Model\Article\ArticleCommentEntity.cs" />
+    <Compile Include="Model\Article\ArticleCommentReply.cs" />
+    <Compile Include="Model\Article\ArticleEntity.cs" />
+    <Compile Include="Model\Article\ArticleLikeDislikeEntity.cs" />
     <Compile Include="Model\Authentication\LoginEntity.cs" />
     <Compile Include="Model\Chat\ChatEntity.cs" />
     <Compile Include="Model\Chat\MessageEntity.cs" />
