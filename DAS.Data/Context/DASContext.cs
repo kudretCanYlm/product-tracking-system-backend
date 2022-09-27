@@ -1,4 +1,5 @@
 ﻿using DAS.Data.Migrations;
+using DAS.Model.Model.Article;
 using DAS.Model.Model.Authentication;
 using DAS.Model.Model.Chat;
 using DAS.Model.Model.Company;
@@ -56,6 +57,10 @@ namespace DAS.Data.Context
         public DbSet<WorkerRoleEntity> WorkerRole { get; set; }
         public DbSet<ChatEntity> Chat { get; set; }
         public DbSet<MessageEntity> Message { get; set; }
+        public DbSet<ArticleEntity> Article { get; set; }
+        public DbSet<ArticleLikeDislikeEntity> ArticleLikeDislike { get; set; }
+        public DbSet<ArticleCommentEntity> ArticleComment { get; set; }
+        public DbSet<ArticleCommentReply> ArticleCommentReply { get; set; }
 
         //public ImageEntity Image { get; set; }
         //public OrderDetailsEntity OrderDetails { get; set; }
