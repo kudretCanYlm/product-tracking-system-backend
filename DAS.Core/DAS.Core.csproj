@@ -63,6 +63,10 @@
     <Compile Include="Infrastructure\RepositoryBase.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Article\ArticleCommentReplyRepository.cs" />
+    <Compile Include="Repository\Article\ArticleCommentRepository.cs" />
+    <Compile Include="Repository\Article\ArticleLikeDislikeRepository.cs" />
+    <Compile Include="Repository\Article\ArticleRepository.cs" />
     <Compile Include="Repository\Authentication\LoginRepository.cs" />
     <Compile Include="Repository\Chat\ChatRepository.cs" />
     <Compile Include="Repository\Chat\MessageRepository.cs" />
