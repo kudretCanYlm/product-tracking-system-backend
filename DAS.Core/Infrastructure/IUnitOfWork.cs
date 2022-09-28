@@ -9,5 +9,7 @@ namespace DAS.Core.Infrastructure
     public interface IUnitOfWork
     {
         void Commit();
+        void BeginTransaction();
+        void RollBack();
     }
 }

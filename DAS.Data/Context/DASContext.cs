@@ -43,6 +43,16 @@ namespace DAS.Data.Context
             base.SaveChanges();
         }
 
+        public virtual void BeginTransaction()
+        {
+            base.Database.BeginTransaction();
+        }
+        public virtual void RollBack()
+        {
+            base.Database.BeginTransaction().Rollback();
+        }
+
+
         //Dbsets
 
         //public LoginEntity Login { get; set; }

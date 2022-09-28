@@ -22,9 +22,19 @@ namespace DAS.Core.Infrastructure
             get { return dasContext ?? (dasContext = databaseFactory.Get()); }
         }
 
+        public void BeginTransaction()
+        {
+            dasContext.BeginTransaction();
+        }
+
         public void Commit()
         {
             DasContext.Commit();
+        }
+
+        public void RollBack()
+        {
+            DasContext.RollBack();
         }
     }
 }
