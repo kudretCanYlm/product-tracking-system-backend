@@ -70,7 +70,7 @@ namespace DAS.Data.Context
         public DbSet<ArticleEntity> Article { get; set; }
         public DbSet<ArticleLikeDislikeEntity> ArticleLikeDislike { get; set; }
         public DbSet<ArticleCommentEntity> ArticleComment { get; set; }
-        public DbSet<ArticleCommentReply> ArticleCommentReply { get; set; }
+        public DbSet<ArticleCommentReplyEntity> ArticleCommentReply { get; set; }
 
         //public ImageEntity Image { get; set; }
         //public OrderDetailsEntity OrderDetails { get; set; }
