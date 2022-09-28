@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace DAS.Model.Model.Article
 {
-    public class ArticleCommentReply : BaseEntity, IBaseTimeEntity
+    public class ArticleCommentReplyEntity : BaseEntity, IBaseTimeEntity
     {
-        public ArticleCommentReply() : base()
+        public ArticleCommentReplyEntity() : base()
         {
 
         }
@@ -28,12 +28,12 @@ namespace DAS.Model.Model.Article
         public LoginEntity ArticleCommentReplyOwner { get; set; }
     }
 
-    public interface IArticleCommentReplyValidation : IValidator<ArticleCommentReply>
+    public interface IArticleCommentReplyValidation : IValidator<ArticleCommentReplyEntity>
     {
 
     }
 
-    public class ArticleCommentReplyValidation : AbstractValidator<ArticleCommentReply>, IArticleCommentReplyValidation
+    public class ArticleCommentReplyValidation : AbstractValidator<ArticleCommentReplyEntity>, IArticleCommentReplyValidation
     {
         public ArticleCommentReplyValidation()
         {
