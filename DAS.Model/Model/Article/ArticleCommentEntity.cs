@@ -31,7 +31,7 @@ namespace DAS.Model.Model.Article
         public ArticleEntity Article { get; set; }
     }
 
-    interface IArticleCommentValidation : IValidator<ArticleCommentEntity>
+    public interface IArticleCommentValidation : IValidator<ArticleCommentEntity>
     {
 
     }
