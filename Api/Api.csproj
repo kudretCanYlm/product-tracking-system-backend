@@ -225,6 +225,7 @@
     <Compile Include="App_Start\Bootstrapper.cs" />
     <Compile Include="App_Start\BrowserJsonFormatter.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
