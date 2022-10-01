@@ -10,7 +10,7 @@ namespace DAS.Core.Repository.Article
 {
     public class ArticleLikeDislikeRepository:RepositoryBase<ArticleLikeDislikeEntity>, IArticleLikeDislikeRepository
     {
-        public ArticleLikeDislikeRepository(DatabaseFactory databaseFactory):base(databaseFactory)
+        public ArticleLikeDislikeRepository(IDatabaseFactory databaseFactory):base(databaseFactory)
         {
 
         }

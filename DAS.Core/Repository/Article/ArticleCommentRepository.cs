@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace DAS.Core.Repository.Article
 {
-    public class ArticleCommentRepository:RepositoryBase<ArticleCommentEntity>,IArticleCommentRepository
+    public class ArticleCommentRepository : RepositoryBase<ArticleCommentEntity>, IArticleCommentRepository
     {
-        public ArticleCommentRepository(DatabaseFactory databaseFactory) : base(databaseFactory)
+        public ArticleCommentRepository(IDatabaseFactory databaseFactory) : base(databaseFactory)
         {
         }
     }
 
-    public interface IArticleCommentRepository:IRepository<ArticleCommentEntity>
+    public interface IArticleCommentRepository : IRepository<ArticleCommentEntity>
     {
 
     }

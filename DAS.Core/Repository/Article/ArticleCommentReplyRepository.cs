@@ -10,7 +10,7 @@ namespace DAS.Core.Repository.Article
 {
     public class ArticleCommentReplyRepository:RepositoryBase<ArticleCommentReplyEntity>, IArticleCommentReplyRepository
     {
-        public ArticleCommentReplyRepository(DatabaseFactory databaseFactory) : base(databaseFactory)
+        public ArticleCommentReplyRepository(IDatabaseFactory databaseFactory) : base(databaseFactory)
         {
 
         }
