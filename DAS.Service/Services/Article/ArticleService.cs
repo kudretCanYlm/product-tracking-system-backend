@@ -11,7 +11,7 @@ namespace DAS.Service.Services.Article
 {
     public interface IArticleService
     {
-
+        ArticleEntity GetArticleById(Guid articleId);
     }
     public class ArticleService:IArticleService
     {
@@ -24,6 +24,11 @@ namespace DAS.Service.Services.Article
             this.articleRepository = articleRepository;
             this.unitOfWork = unitOfWork;
             this.validator = validator;
+        }
+
+        public ArticleEntity GetArticleById(Guid articleId)
+        {
+            return articleRepository.Get(x => x.Id == articleId && x.IsPublic==true) ?? null;
         }
     }
 }
