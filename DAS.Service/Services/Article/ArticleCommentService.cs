@@ -14,13 +14,13 @@ namespace DAS.Service.Services.Article
 
     }
 
-    public class ArticleCommentService:IArticleLikeDislikeService
+    public class ArticleCommentService:IArticleCommentService
     {
         private readonly IArticleCommentRepository articleCommentRepository;
         private readonly IUnitOfWork unitOfWork;
-        private readonly IArticleLikeDislikeValidation validator;
+        private readonly IArticleCommentValidation validator;
 
-        public ArticleCommentService(IArticleCommentRepository articleCommentRepository, IUnitOfWork unitOfWork, IArticleLikeDislikeValidation validator)
+        public ArticleCommentService(IArticleCommentRepository articleCommentRepository, IUnitOfWork unitOfWork, IArticleCommentValidation validator)
         {
             this.articleCommentRepository = articleCommentRepository;
             this.unitOfWork = unitOfWork;
