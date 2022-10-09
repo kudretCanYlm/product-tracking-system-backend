@@ -13,6 +13,7 @@ namespace DAS.Model.Base.Enums
         UserBackground,
         CompanIcon,
         CompanyBackground,
-        project
+        project,
+        article
     }
 }
