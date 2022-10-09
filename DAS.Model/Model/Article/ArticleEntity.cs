@@ -21,7 +21,7 @@ namespace DAS.Model.Model.Article
         public string ArticleTitle { get; set; }
         public Guid ArticleOwnerId { get; set; }
         public string Summary { get; set; }
-        public string Content { get; set; }
+        public string ArticleContent { get; set; }
         public bool IsPublic { get; set; } = true;
         public DateTime? CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
@@ -51,7 +51,7 @@ namespace DAS.Model.Model.Article
                 .NotEmpty().WithMessage("don't be empty")
                 .NotNull().WithMessage("don't be null ");
 
-            RuleFor(x => x.Content).MinimumLength(100)
+            RuleFor(x => x.ArticleContent).MinimumLength(100)
                 .WithMessage("Content length greater then 100")
                 .NotEmpty().WithMessage("don't be empty")
                 .NotNull().WithMessage("don't be null ");
