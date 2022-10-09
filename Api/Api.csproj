@@ -230,6 +230,7 @@
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\MediaController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\SocketController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -250,6 +251,7 @@
     <Compile Include="Infrastructure\Jwt\JwtManager.cs" />
     <Compile Include="Mappings\EntityToView.cs" />
     <Compile Include="Mappings\ViewToEntity.cs" />
+    <Compile Include="Models\Article\ArticleModel.cs" />
     <Compile Include="Models\Authentication\LoginModel.cs" />
     <Compile Include="Models\Chat\MessageModel.cs" />
     <Compile Include="Models\Location\CountryModel.cs" />
@@ -278,6 +280,10 @@
     <ProjectReference Include="..\DAS.Core\DAS.Core.csproj">
       <Project>{7979C834-2672-46E6-A141-D3DB69B69F03}</Project>
       <Name>DAS.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAS.Data\DAS.Data.csproj">
+      <Project>{855AF121-9C1C-4895-BFD0-9B753BE7186D}</Project>
+      <Name>DAS.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\DAS.Model\DAS.Model.csproj">
       <Project>{18C46F53-A230-4B64-A55A-96E8F06D8A9A}</Project>

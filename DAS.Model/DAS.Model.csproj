@@ -70,6 +70,8 @@
     <Compile Include="Base\Extensions\EntitiesExtensions.cs" />
     <Compile Include="Base\Interfaces\IBaseEntity.cs" />
     <Compile Include="Base\Interfaces\IBaseTimeEntity.cs" />
+    <Compile Include="Dto\Article\ArticleDto.cs" />
+    <Compile Include="Dto\Chat\ChatDto.cs" />
     <Compile Include="Model\Article\ArticleCommentEntity.cs" />
     <Compile Include="Model\Article\ArticleCommentReplyEntity.cs" />
     <Compile Include="Model\Article\ArticleEntity.cs" />
@@ -88,6 +90,7 @@
     <Compile Include="Model\Order\OrderDetailsEntity.cs" />
     <Compile Include="Model\Order\OrderItemsEntity.cs" />
     <Compile Include="Model\Order\PaymentDetailsEntity.cs" />
+    <Compile Include="Model\Post\PostEntity.cs" />
     <Compile Include="Model\Product\DiscountEntity.cs" />
     <Compile Include="Model\Product\ProductCategoryEntity.cs" />
     <Compile Include="Model\Product\ProductEntity.cs" />

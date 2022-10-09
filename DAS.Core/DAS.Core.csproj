@@ -75,6 +75,7 @@
     <Compile Include="Repository\Company\WorkerRoleRepository.cs" />
     <Compile Include="Repository\Location\CountryRepository.cs" />
     <Compile Include="Repository\Media\ImageRepository.cs" />
+    <Compile Include="Repository\Post\PostRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAS.Data\DAS.Data.csproj">
