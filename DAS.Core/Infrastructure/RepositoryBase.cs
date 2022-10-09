@@ -15,7 +15,6 @@ namespace DAS.Core.Infrastructure
     {
         private DASContext dasContext;
         private readonly IDbSet<T> dbset;
-        //https://github.com/MarlabsInc/SocialGoal/blob/master/source/SocialGoal.Service/FollowUserService.cs
 
         protected RepositoryBase(IDatabaseFactory databaseFactory)
         {
@@ -80,6 +79,13 @@ namespace DAS.Core.Infrastructure
         {
             return dbset.Where(where).ToList();
         }
+
+       public virtual IQueryable<T> GetManyQuery(Expression<Func<T, bool>> where)
+        {
+            return dbset.Where(where);
+        }
+
+
 
         /// <summary>
         /// Return a paged list of entities
