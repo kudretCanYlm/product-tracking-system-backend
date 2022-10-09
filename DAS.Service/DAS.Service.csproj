@@ -83,6 +83,7 @@
     <Compile Include="Services\Company\WorkerRoleService.cs" />
     <Compile Include="Services\Location\CountryService.cs" />
     <Compile Include="Services\Media\ImageService.cs" />
+    <Compile Include="Services\Post\PostService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAS.Core\DAS.Core.csproj">
