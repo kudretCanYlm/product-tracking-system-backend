@@ -40,15 +40,14 @@ namespace DAS.Model.Model.Article
         public ArticleLikeDislikeValidation()
         {
             RuleFor(x => x.Isliked)
-                .NotEmpty().WithMessage("don't be empty")
-                .NotNull().WithMessage("don't be null ");
+                .NotNull().WithMessage("Isliked don't be null ");
 
             RuleFor(x => x.CreatedAt)
-                .NotEmpty().WithMessage("don't be empty")
-                .NotNull().WithMessage("don't be null ");
+                .NotEmpty().WithMessage("CreatedAt be empty")
+                .NotNull().WithMessage("CreatedAt don't be null ");
 
-            RuleFor(x=>x.ArticleLikeDislikeOwner).SetValidator(new LoginValidation());
-            RuleFor(x => x.Article).SetValidator(new ArticleValidation());            
+            RuleFor(x => x.ArticleLikeDislikeOwner).SetValidator(new LoginValidation());
+            RuleFor(x => x.Article).SetValidator(new ArticleValidation());
         }
     }
 }
