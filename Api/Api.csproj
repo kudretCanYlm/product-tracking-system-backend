@@ -251,6 +251,7 @@
     <Compile Include="Infrastructure\Jwt\JwtManager.cs" />
     <Compile Include="Mappings\EntityToView.cs" />
     <Compile Include="Mappings\ViewToEntity.cs" />
+    <Compile Include="Models\Article\ArticleLikeDislikeModel.cs" />
     <Compile Include="Models\Article\ArticleModel.cs" />
     <Compile Include="Models\Authentication\LoginModel.cs" />
     <Compile Include="Models\Chat\MessageModel.cs" />

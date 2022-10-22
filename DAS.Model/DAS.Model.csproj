@@ -71,6 +71,7 @@
     <Compile Include="Base\Interfaces\IBaseEntity.cs" />
     <Compile Include="Base\Interfaces\IBaseTimeEntity.cs" />
     <Compile Include="Dto\Article\ArticleDto.cs" />
+    <Compile Include="Dto\Article\ArticleLikeDislikeEntity.cs" />
     <Compile Include="Dto\Chat\ChatDto.cs" />
     <Compile Include="Model\Article\ArticleCommentEntity.cs" />
     <Compile Include="Model\Article\ArticleCommentReplyEntity.cs" />
