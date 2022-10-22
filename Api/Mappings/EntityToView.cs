@@ -50,6 +50,9 @@ namespace Api.Mappings
                 .ForMember(x => x.ArticleOwnerId, act => act.MapFrom(x => x.OwnerId))
                 .ForMember(x => x.OwnerName, act => act.MapFrom(x => x.OwnerName))
                 .ForMember(x => x.OwnerSurname, act => act.MapFrom(x => x.OwnerSurname));
+
+            Mapper.CreateMap<ArticleLikeDislikeEntity, ArticleLikeDislikeSingleViewModel>()
+                .ForMember(x => x.Isliked, act => act.MapFrom(x => x.Isliked));
         }
     }
 }

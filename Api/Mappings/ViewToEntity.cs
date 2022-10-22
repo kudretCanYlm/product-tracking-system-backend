@@ -37,7 +37,9 @@ namespace Api.Mappings
                 .ForMember(x => x.ArticleContent, act => act.MapFrom(x => x.Content))
                 .ForMember(x => x.IsPublic, act => act.MapFrom(x => x.IsPublic));
 
-
+            Mapper.CreateMap<ArticleLikeDislikePostModel, ArticleLikeDislikeEntity>()
+                .ForMember(x => x.ArticleId, act => act.MapFrom(x => x.ArticleId))
+                .ForMember(x => x.Isliked, act => act.MapFrom(x => x.Isliked));
         }
     }
 }
