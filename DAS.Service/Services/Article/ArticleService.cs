@@ -15,8 +15,10 @@ namespace DAS.Service.Services.Article
     public interface IArticleService
     {
         ArticleDtoView GetArticleById(Guid articleId);
+        ArticleEntity GetArticleEntityById(Guid articleId);
         IEnumerable<ArticleDtoView> GetAllArticles();
         object AddNewArticle(ref ArticleEntity article);
+        IEnumerable<ArticleDtoView> GetUserArticles(Guid ownerId);
     }
     public class ArticleService : IArticleService
     {
@@ -54,11 +56,25 @@ namespace DAS.Service.Services.Article
 
             return article;
         }
+
+        public ArticleEntity GetArticleEntityById(Guid articleId)
+        {
+            var article = articleRepository.GetById(articleId);
+            return article;
+        }
+
+        public IEnumerable<ArticleDtoView> GetUserArticles(Guid ownerId)
+        {
+            var articles = articleRepository.GetArticlesWithDto(x => x.ArticleOwnerId == ownerId && x.IsPublic);
+
+            return articles;
+        }
         public IEnumerable<ArticleDtoView> GetAllArticles()
         {
             var articles = articleRepository.GetArticlesWithDto(null);
             return articles;
         }
+
 
         private object SaveArticleWithMessage()
         {
@@ -95,5 +111,6 @@ namespace DAS.Service.Services.Article
             unitOfWork.Commit();
         }
 
+        
     }
 }
