@@ -116,5 +116,66 @@ namespace Api.Controllers
 
             return Request.CreateResponse(HttpStatusCode.BadRequest, status.ToString());
         }
+
+        [HttpGet,Route("getComments/{articleId}"),JwtAuthentication(RoleEnum.Admin),CacheControl]
+        public HttpResponseMessage GetArticleComments([FromUri] Guid articleId) 
+        {
+            var articleComments = articleCommentService.GetCommentsDto(articleId);
+
+            if (articleComments.Count() > 0)
+                return Request.CreateResponse(Mapper.Map<IEnumerable<ArticleCommentViewModel>>(articleComments));
+
+            return Request.CreateResponse(HttpStatusCode.BadRequest, "there isn't any comment in this article");
+        }
+
+        [HttpPost,Route("addComment"),JwtAuthentication(RoleEnum.Admin),CacheControl]
+        public HttpResponseMessage PostComment([FromBody] ArticleCommentPostModel articleCommentPost)
+        {
+            if(articleCommentPost==null)
+                return  Request.CreateResponse(HttpStatusCode.BadRequest, "article comment is null");
+
+            var articleComment = Mapper.Map<ArticleCommentEntity>(articleCommentPost);
+
+            string userName = ActionContext.RequestContext.Principal.Identity.Name;
+            var user = loginService.GetUser(x => x.Username == userName);
+            var article = articleService.GetArticleEntityById(articleComment.ArticleId);
+
+            if (user == null || article == null)
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "user or/and article is/are not found");
+            
+            articleComment.CommentOwner= user;
+            articleComment.Article = article;
+
+            var result = articleCommentService.AddComment(ref articleComment);
+
+            if (result is true)
+                return Request.CreateResponse(HttpStatusCode.Created, Mapper.Map<ArticleCommentViewModel>(articleComment));
+
+            return Request.CreateResponse(HttpStatusCode.BadRequest, result);
+
+        }
+
+        [HttpDelete,Route("deleteComment/{commentId}"),JwtAuthentication(RoleEnum.Admin),CacheControl]
+        public HttpResponseMessage DeleteComment([FromUri] Guid commentId)
+        {
+            var myComment = articleCommentService.GetComment(commentId);
+
+            string userName = ActionContext.RequestContext.Principal.Identity.Name;
+
+            Guid userId = loginService.GetUserId(userName).Value;
+
+            if (myComment==null)
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "user comment is not found");
+
+            if (myComment.CommentOwnerId != userId)
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "this user is not owner of this comment");
+
+            var result = articleCommentService.DeleteComment(myComment);
+
+            if (result is true)
+                return Request.CreateResponse(HttpStatusCode.Accepted, $"{myComment.Id} deleted");
+            return Request.CreateResponse(HttpStatusCode.BadRequest, result.ToString());
+        }
+
     }
 }
