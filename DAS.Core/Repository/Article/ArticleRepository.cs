@@ -18,13 +18,13 @@ namespace DAS.Core.Repository.Article
 
         public IEnumerable<ArticleDtoView> GetArticlesWithDto(Expression<Func<ArticleEntity, bool>> where)
         {
-            var articles = GetManyQuery(where == null ? x => x.IsPublic == true : where).Select(Selects.articleViewDto).ToList();
+            var articles = GetManyQuery(where == null ? x => x.IsPublic == true : where).Select(ArticleRepositorySelects.articleViewDto).ToList();
             return articles;
         }
 
         public ArticleDtoView GetArticleWithDto(Expression<Func<ArticleEntity, bool>> where)
         {
-            var article = GetManyQuery(where == null ? x => x.IsPublic == true : where).Select(Selects.articleViewDto).FirstOrDefault();
+            var article = GetManyQuery(where == null ? x => x.IsPublic == true : where).Select(ArticleRepositorySelects.articleViewDto).FirstOrDefault();
 
             return article;
         }
@@ -36,7 +36,7 @@ namespace DAS.Core.Repository.Article
         IEnumerable<ArticleDtoView> GetArticlesWithDto(Expression<Func<ArticleEntity, bool>> where);
     }
 
-    public class Selects
+    public class ArticleRepositorySelects
     {
         public static Expression<Func<ArticleEntity, ArticleDtoView>> articleViewDto = article => new ArticleDtoView
         {
