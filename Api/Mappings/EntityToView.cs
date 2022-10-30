@@ -53,6 +53,23 @@ namespace Api.Mappings
 
             Mapper.CreateMap<ArticleLikeDislikeEntity, ArticleLikeDislikeSingleViewModel>()
                 .ForMember(x => x.Isliked, act => act.MapFrom(x => x.Isliked));
+
+            Mapper.CreateMap<ArticleCommentEntity, ArticleCommentViewModel>()
+                .ForMember(x => x.Id, act => act.MapFrom(x => x.Id))
+                .ForMember(x => x.Comment, act => act.MapFrom(x => x.Comment))
+                .ForMember(x => x.CommentOwnerId, act => act.MapFrom(x => x.CommentOwnerId))
+                .ForMember(x => x.CommentOwnerName, act => act.MapFrom(x => x.CommentOwner.Name))
+                .ForMember(x => x.CommentOwnerSurname, act => act.MapFrom(x => x.CommentOwner.Surname))
+                .ForMember(x => x.CreatedAt, act => act.MapFrom(x => x.CreatedAt));
+
+            Mapper.CreateMap<ArticleCommentDto,ArticleCommentViewModel>()
+                .ForMember(x => x.Id, act => act.MapFrom(x => x.Id))
+                .ForMember(x => x.Comment, act => act.MapFrom(x => x.Comment))
+                .ForMember(x => x.CommentOwnerId, act => act.MapFrom(x => x.CommentOwnerId))
+                .ForMember(x => x.CommentOwnerName, act => act.MapFrom(x => x.CommentOwnerName))
+                .ForMember(x => x.CommentOwnerSurname, act => act.MapFrom(x => x.CommentOwnerSurname))
+                .ForMember(x => x.CreatedAt, act => act.MapFrom(x => x.CreatedAt));
+
         }
     }
 }
