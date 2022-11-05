@@ -7,6 +7,7 @@ using DAS.Model.Model.Location;
 using DAS.Model.Model.Media;
 using DAS.Model.Model.Order;
 using DAS.Model.Model.Product;
+using DAS.Model.Model.Project;
 using DAS.Model.Model.User;
 using System;
 using System.Collections.Generic;
@@ -55,8 +56,6 @@ namespace DAS.Data.Context
 
         //Dbsets
 
-        //public LoginEntity Login { get; set; }
-        //public CityEntity City { get; set; }
         public DbSet<CountryEntity> Country { get; set; }
         public DbSet<LoginEntity> Login { get; set; }
         public DbSet<UserAddressEntity> UserAddress { get; set; }
@@ -72,17 +71,11 @@ namespace DAS.Data.Context
         public DbSet<ArticleCommentEntity> ArticleComment { get; set; }
         public DbSet<ArticleCommentReplyEntity> ArticleCommentReply { get; set; }
 
-        //public ImageEntity Image { get; set; }
-        //public OrderDetailsEntity OrderDetails { get; set; }
-        //public OrderItemsEntity OrderItems { get; set; }
-        //public PaymentDetailsEntity PaymentDetails { get; set; }
-        //public DiscountEntity DiscountEntity { get; set; }
-        //public ProductCategoryEntity ProductCategory { get; set; }
-        //public ProductEntity Product { get; set; }
-        //public ProductInventoryEntity ProductInventory { get; set; }
-        //public UserAddressEntity UserAddress { get; set; }
-        //public UserEntity User { get; set; }
-        //public UserPaymentEntity UserPayment { get; set; }
+        public DbSet<ProjectEntity> Project { get; set; }
+        public DbSet<ProjectUserEntity> ProjectUser { get; set; }
+        public DbSet<ProjectSupporterEntity> ProjectSupporter { get; set; }
+        public DbSet<ProjectRateEntity> ProjectRate { get; set; }
+        public DbSet<ProjectPersonEntity> ProjectPerson { get; set; }
 
     }
 }
