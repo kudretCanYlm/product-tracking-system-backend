@@ -67,6 +67,7 @@
     <Compile Include="Base\BaseEntity.cs" />
     <Compile Include="Base\Enums\DateTypesEnum.cs" />
     <Compile Include="Base\Enums\ImageTypesEnum.cs" />
+    <Compile Include="Base\Enums\MoneyTypesEnum.cs" />
     <Compile Include="Base\Extensions\EntitiesExtensions.cs" />
     <Compile Include="Base\Interfaces\IBaseEntity.cs" />
     <Compile Include="Base\Interfaces\IBaseTimeEntity.cs" />
@@ -97,6 +98,11 @@
     <Compile Include="Model\Product\ProductCategoryEntity.cs" />
     <Compile Include="Model\Product\ProductEntity.cs" />
     <Compile Include="Model\Product\ProductInventoryEntity.cs" />
+    <Compile Include="Model\Project\ProjectEntity.cs" />
+    <Compile Include="Model\Project\ProjectPersonEntity.cs" />
+    <Compile Include="Model\Project\ProjectRateEntity.cs" />
+    <Compile Include="Model\Project\ProjectSupporterEntity.cs" />
+    <Compile Include="Model\Project\ProjectUserEntity.cs" />
     <Compile Include="Model\User\UserAddressEntity.cs" />
     <Compile Include="Model\User\UserPaymentEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
