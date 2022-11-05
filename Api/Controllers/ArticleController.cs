@@ -57,6 +57,18 @@ namespace Api.Controllers
 
         }
 
+        [Route("getUserArticlesRange/{id}/{pageNumber}/{pageSize}"), JwtAuthentication(RoleEnum.Admin), CacheControl]
+        public HttpResponseMessage GetUserArticlesRange([FromUri] Guid id,int pageNumber, int pageSize)
+        {
+            var articles = articleService.GetUserArticles(id, pageNumber, pageSize, x => x.ArticleOwner.CreatedAt);
+
+            if (articles == null)
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "didn't find any article");
+
+            return Request.CreateResponse(HttpStatusCode.Created, Mapper.Map<IEnumerable<ArticleViewModel>>(articles));
+        }
+
+
         [Route("likeOrDislikeArticle"), JwtAuthentication(RoleEnum.Admin),HttpPost]
         public HttpResponseMessage LikeArticle([FromBody] ArticleLikeDislikePostModel articleLikeDislikePostModel)
         {

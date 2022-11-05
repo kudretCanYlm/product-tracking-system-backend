@@ -7,6 +7,7 @@ using DAS.Service.common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,6 +20,7 @@ namespace DAS.Service.Services.Article
         IEnumerable<ArticleDtoView> GetAllArticles();
         object AddNewArticle(ref ArticleEntity article);
         IEnumerable<ArticleDtoView> GetUserArticles(Guid ownerId);
+        IEnumerable<ArticleDtoView> GetUserArticles<TOrder>(Guid ownerId, int pageNumber, int pageSize, Expression<Func<ArticleEntity, TOrder>> orderBy);
     }
     public class ArticleService : IArticleService
     {
@@ -69,6 +71,16 @@ namespace DAS.Service.Services.Article
 
             return articles;
         }
+
+        public IEnumerable<ArticleDtoView> GetUserArticles<TOrder>(Guid ownerId, int pageNumber, int pageSize, Expression<Func<ArticleEntity, TOrder>> orderBy)
+        {
+            var page = new Page(pageNumber, pageSize);
+
+            var articles = articleRepository.GetArticlesPage(page, x=>x.IsPublic==true && x.ArticleOwnerId==ownerId, orderBy);
+
+            return articles;
+        }
+
         public IEnumerable<ArticleDtoView> GetAllArticles()
         {
             var articles = articleRepository.GetArticlesWithDto(null);
@@ -111,6 +123,6 @@ namespace DAS.Service.Services.Article
             unitOfWork.Commit();
         }
 
-        
+
     }
 }
