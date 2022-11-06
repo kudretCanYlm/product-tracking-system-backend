@@ -1,11 +1,14 @@
 ﻿using Api.Models.Article;
 using Api.Models.Chat;
 using Api.Models.Location;
+using Api.Models.Project;
 using AutoMapper;
+using DAS.Model.Base.Enums;
 using DAS.Model.Dto.Article;
 using DAS.Model.Model.Article;
 using DAS.Model.Model.Chat;
 using DAS.Model.Model.Location;
+using DAS.Model.Model.Project;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,6 +72,13 @@ namespace Api.Mappings
                 .ForMember(x => x.CommentOwnerName, act => act.MapFrom(x => x.CommentOwnerName))
                 .ForMember(x => x.CommentOwnerSurname, act => act.MapFrom(x => x.CommentOwnerSurname))
                 .ForMember(x => x.CreatedAt, act => act.MapFrom(x => x.CreatedAt));
+
+            Mapper.CreateMap<ProjectEntity, ProjectViewModel>()
+                .ForMember(x => x.Id, act => act.MapFrom(x => x.Id))
+                .ForMember(x => x.Name, act => act.MapFrom(x => x.Name))
+                .ForMember(x => x.ContentText, act => act.MapFrom(x => x.ContentText))
+                .ForMember(x => x.Price, act => act.MapFrom(x => x.Price))
+                .ForMember(x => x.MoneyType, act => act.MapFrom(x => Enum.GetName(typeof(MoneyTypesEnum), x.MoneyType)));
 
         }
     }
