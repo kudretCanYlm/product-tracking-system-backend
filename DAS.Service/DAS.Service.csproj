@@ -89,6 +89,7 @@
     <Compile Include="Services\Project\ProjectService.cs" />
     <Compile Include="Services\Project\ProjectSupporterService.cs" />
     <Compile Include="Services\Project\ProjectUserService.cs" />
+    <Compile Include="Services\User\UserRoleAndDescriptionService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAS.Core\DAS.Core.csproj">

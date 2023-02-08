@@ -105,6 +105,7 @@
     <Compile Include="Model\Project\ProjectUserEntity.cs" />
     <Compile Include="Model\User\UserAddressEntity.cs" />
     <Compile Include="Model\User\UserPaymentEntity.cs" />
+    <Compile Include="Model\User\UserRoleAndDescriptionEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
