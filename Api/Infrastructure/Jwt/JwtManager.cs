@@ -37,7 +37,7 @@ namespace Api.Infrastructure.Jwt
             SecurityToken securityToken = tokenHandler.CreateToken(tokenDescriptor);
             var token = tokenHandler.WriteToken(securityToken);
 
-            return token;
+            return SymetricKey.EncryptString(token);
         }
 
         public static ClaimsPrincipal GetPrincipal(string token)

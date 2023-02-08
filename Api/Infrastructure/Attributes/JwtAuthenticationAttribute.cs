@@ -31,6 +31,7 @@ namespace Api.Infrastructure.Attributes
 
         public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
         {
+            
             var request = context.Request;
             var authorization = request.Headers.Authorization;
 
@@ -43,7 +44,7 @@ namespace Api.Infrastructure.Attributes
                 return;
             }
 
-            var token = authorization.Parameter;
+            var token = SymetricKey.DecryptString(authorization.Parameter);
             var principal = await AuthenticateJwtToken(token);
 
             if (principal == null)
@@ -55,7 +56,7 @@ namespace Api.Infrastructure.Attributes
         //will ad role configs
         private static bool ValidateToken(string token, out string username,out RoleEnum role)
         {
-            username = null;
+			username = null;
             role = RoleEnum.NonRole;
 
             var simplePrinciple = JwtManager.GetPrincipal(token);
