@@ -250,6 +250,7 @@
     <Compile Include="Infrastructure\Filters\HttpAuthenticationChallengeContextExtensions.cs" />
     <Compile Include="Infrastructure\Attributes\JwtAuthenticationAttribute.cs" />
     <Compile Include="Infrastructure\Jwt\JwtManager.cs" />
+    <Compile Include="Infrastructure\Jwt\SymetricKey.cs" />
     <Compile Include="Mappings\EntityToView.cs" />
     <Compile Include="Mappings\ViewToEntity.cs" />
     <Compile Include="Models\Article\ArticleCommentModel.cs" />

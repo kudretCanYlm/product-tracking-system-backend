@@ -81,6 +81,7 @@
     <Compile Include="Repository\Project\ProjectRepository.cs" />
     <Compile Include="Repository\Project\ProjectSupporterRepository.cs" />
     <Compile Include="Repository\Project\ProjectUserRepository.cs" />
+    <Compile Include="Repository\User\UserRoleAndDescriptionRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAS.Data\DAS.Data.csproj">
