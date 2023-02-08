@@ -42,9 +42,29 @@ namespace Api.Controllers
             var status = projectService.AddNewProject(ref projectEntity);
 
             if (status is true)
-                Request.CreateResponse(HttpStatusCode.Created, Mapper.Map<ProjectViewModel>(status));
+               return Request.CreateResponse(HttpStatusCode.Created, Mapper.Map<ProjectViewModel>(projectEntity));
 
             return Request.CreateResponse(HttpStatusCode.BadRequest, status.ToString());
+        }
+
+        [HttpPost,Route("DeleteById/{Id}"), JwtAuthentication(RoleEnum.Admin)]
+        public HttpResponseMessage DeleteById(Guid Id)
+        {
+            var result=projectService.DeleteProject(Id);
+
+            if ((bool)result == true)
+                return Request.CreateResponse(HttpStatusCode.OK,"Deleted");
+
+            return Request.CreateResponse(HttpStatusCode.BadRequest, "Error");
+        }
+
+        [HttpGet,Route("GetProjectsByRange/{pageNumber}/{pageSize}"),AllowAnonymous]
+        public HttpResponseMessage GetArticlesByRange(int pageNumber,int pageSize)
+        {
+            var projects = projectService.GetProjectsByRange(pageNumber, pageSize, x => x.ContentText.Length);
+
+            return Request.CreateResponse(HttpStatusCode.OK, Mapper.Map<IEnumerable<ProjectViewModel>>(projects));
+
         }
     }
 }
