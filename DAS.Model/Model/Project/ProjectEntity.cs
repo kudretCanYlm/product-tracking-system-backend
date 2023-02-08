@@ -48,6 +48,11 @@ namespace DAS.Model.Model.Project
             RuleFor(x => x.Price)
                 .GreaterThanOrEqualTo(0).WithMessage("Price greater than or equal to 0");
 
+            RuleFor(x => x.MoneyType)
+                .NotNull().WithMessage("MoneyType don't be null")
+                .NotEmpty().WithMessage("MoneyType don't be empty")
+                .IsInEnum().WithMessage("Wrong enum");
+
             RuleFor(x=>x.CreatedAt)
                 .NotNull().WithMessage("CreatedAt don't be null")
                 .NotEmpty().WithMessage("CreatedAt don't be empty");
