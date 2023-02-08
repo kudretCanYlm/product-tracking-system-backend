@@ -70,8 +70,8 @@ namespace DAS.Data.Context
         public DbSet<ArticleLikeDislikeEntity> ArticleLikeDislike { get; set; }
         public DbSet<ArticleCommentEntity> ArticleComment { get; set; }
         public DbSet<ArticleCommentReplyEntity> ArticleCommentReply { get; set; }
-
-        public DbSet<ProjectEntity> Project { get; set; }
+        public DbSet<UserRoleAndDescriptionEntity> UserRoleAndDescription { get; set; }
+		public DbSet<ProjectEntity> Project { get; set; }
         public DbSet<ProjectUserEntity> ProjectUser { get; set; }
         public DbSet<ProjectSupporterEntity> ProjectSupporter { get; set; }
         public DbSet<ProjectRateEntity> ProjectRate { get; set; }
