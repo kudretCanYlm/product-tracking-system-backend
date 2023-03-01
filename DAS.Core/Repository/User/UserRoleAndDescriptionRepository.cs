@@ -5,7 +5,7 @@ namespace DAS.Core.Repository.User
 {
 	public class UserRoleAndDescriptionRepository : RepositoryBase<UserRoleAndDescriptionEntity>, IUserRoleAndDescriptionRepository
 	{
-		protected UserRoleAndDescriptionRepository(IDatabaseFactory databaseFactory) : base(databaseFactory)
+		public UserRoleAndDescriptionRepository(IDatabaseFactory databaseFactory) : base(databaseFactory)
 		{
 		}
 	}
