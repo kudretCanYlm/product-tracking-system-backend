@@ -58,7 +58,7 @@ namespace Api.Controllers
             return Request.CreateResponse(HttpStatusCode.BadRequest, "Error");
         }
 
-        [HttpGet,Route("GetProjectsByRange/{pageNumber}/{pageSize}"),AllowAnonymous]
+        [HttpGet,Route("GetProjectsByRange/{pageNumber}/{pageSize}"), JwtAuthentication(RoleEnum.Admin)]
         public HttpResponseMessage GetArticlesByRange(int pageNumber,int pageSize)
         {
             var projects = projectService.GetProjectsByRange(pageNumber, pageSize, x => x.ContentText.Length);
