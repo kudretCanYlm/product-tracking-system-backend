@@ -64,8 +64,10 @@
     <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="PagingAndFiltering\FilteringOption.cs" />
     <Compile Include="PagingAndFiltering\IPagedList.cs" />
+    <Compile Include="PagingAndFiltering\PagedList.cs" />
     <Compile Include="PagingAndFiltering\PageSearchArgs.cs" />
     <Compile Include="PagingAndFiltering\PagingArgs.cs" />
+    <Compile Include="PagingAndFiltering\PagingExtensions.cs" />
     <Compile Include="PagingAndFiltering\SortingOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Article\ArticleCommentReplyRepository.cs" />
