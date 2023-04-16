@@ -35,8 +35,9 @@ namespace Api.Controllers
 
         ChatSocketHandler chatSocketHandler = new ChatSocketHandler();
 
-        [Route("connectSocket"), AcceptVerbs("GET", "POST"), AllowAnonymous]
-        public HttpResponseMessage ChatSocket()
+
+        [Route("connectSocket/{tokenParam?}"), AcceptVerbs("GET", "POST"), AllowAnonymous]
+        public HttpResponseMessage ChatSocket(string tokenParam=null)
         {
 
             if (!HttpContext.Current.IsWebSocketRequest)
@@ -44,9 +45,15 @@ namespace Api.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "that isn't a socket connection");
 
             }
+            var test1 = Request;
+            var test = Request.Headers;
+            string token = Request.Headers.Where(x => x.Key == "token").FirstOrDefault().Value?.FirstOrDefault().ToString() ?? Request.Headers.Where(x => x.Key == "sec-websocket-protocol").FirstOrDefault().Value?.FirstOrDefault().ToString() ?? tokenParam.Replace(" ","+");
 
-            var token = Request.Headers.Where(x => x.Key == "token").FirstOrDefault().Value.FirstOrDefault().ToString();
-            var principal = JwtManager.GetPrincipal(token) ?? null;
+            if(token == null)
+				return Request.CreateResponse(HttpStatusCode.Unauthorized,"wrong token");
+
+
+			var principal = JwtManager.GetPrincipal(SymetricKey.DecryptString(token)) ?? null;
             if (principal != null)
             {
 
