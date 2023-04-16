@@ -9,10 +9,10 @@ namespace Api.Models.User
 	{
 		 public class UserRoleAndDescriptionViewModel
 		{
-			public Guid OwnerUserId { get; set; }
-			public string FullName { get; set; }
-			public string MiniRole { get; set; }
-			public string MiniDescription { get; set; }
+			public Guid Id { get; set; }
+			public string Name { get; set; }
+			public string Job { get; set; }
+			public string Description { get; set; }
 		}
 
 		public class UserRoleAndDescriptionPostModel
