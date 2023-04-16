@@ -1,4 +1,6 @@
-﻿using DAS.Core.Infrastructure;
+﻿using AutoMapper;
+using DAS.Core.Infrastructure;
+using DAS.Core.PagingAndFiltering;
 using DAS.Core.Repository.Article;
 using DAS.Core.Repository.Authentication;
 using DAS.Model.Dto.Article;
@@ -21,7 +23,10 @@ namespace DAS.Service.Services.Article
         object AddNewArticle(ref ArticleEntity article);
         IEnumerable<ArticleDtoView> GetUserArticles(Guid ownerId);
         IEnumerable<ArticleDtoView> GetUserArticles<TOrder>(Guid ownerId, int pageNumber, int pageSize, Expression<Func<ArticleEntity, TOrder>> orderBy);
-    }
+        IPagedList<ArticleEntity> GetUserArticles(PageSearchArgs args);
+        IEnumerable<ArticleDtoView> GetArticleByName(string name);
+
+	}
     public class ArticleService : IArticleService
     {
         private readonly IArticleRepository articleRepository;
@@ -79,6 +84,24 @@ namespace DAS.Service.Services.Article
             var articles = articleRepository.GetArticlesPage(page, x=>x.IsPublic==true && x.ArticleOwnerId==ownerId, orderBy);
 
             return articles;
+        }
+
+        public IPagedList<ArticleEntity> GetUserArticles(PageSearchArgs args)
+        {
+            var articlePagedList = articleRepository.GetArticlesPagedList(args);
+
+			return articlePagedList;
+
+		}
+
+        public IEnumerable<ArticleDtoView> GetArticleByName(string name)
+        {
+            var articles = articleRepository.GetArticlesByName(name);
+
+            if(articles== null)
+                return null;
+
+            return Mapper.Map<IEnumerable<ArticleDtoView>>(articles);
         }
 
         public IEnumerable<ArticleDtoView> GetAllArticles()
