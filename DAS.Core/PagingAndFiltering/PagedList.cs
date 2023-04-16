@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AutoMapper;
+using DAS.Model.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAS.Core.PagingAndFiltering
 {
-	public class PagedList<T> : IPagedList<T>
+	public class PagedList<T> : IPagedList<T> where T : BaseEntity
 	{
 		public PagedList(int pageIndex, int pageSize, int totalCount, int totalPages, IEnumerable<T> items)
 		{
@@ -18,7 +20,7 @@ namespace DAS.Core.PagingAndFiltering
 			Items = items;
 		}
 
-		public PagedList(IQueryable<T> query, PagingArgs pagingArgs, List<(SortingOption, Expression<Func<T, object>>)> orderByList = null, List<(FilteringOption, Expression<Func<T, bool>>)> filterList = null)
+		public PagedList(IQueryable<T> query, PagingArgs pagingArgs, List<(SortingOption, Expression<Func<T, object>>)> orderByList = null, List<(FilteringOption, Expression<Func<T, bool>>)> filterList = null) 
 		{
 			query = query.MyOrderBy(orderByList);
 			query = query.MyWhere(filterList);
@@ -67,6 +69,6 @@ namespace DAS.Core.PagingAndFiltering
 
 		public IEnumerable<T> Items { get; }
 
-		
+
 	}
 }

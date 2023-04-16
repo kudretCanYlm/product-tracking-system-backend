@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAS.Model.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -9,7 +10,7 @@ namespace DAS.Core.PagingAndFiltering
 {
 	public static class PagingExtensions
 	{
-		public static IQueryable<T> MyOrderBy<T>(this IQueryable<T> query, List<(SortingOption, Expression<Func<T, object>>)> orderByList)
+		public static IQueryable<T> MyOrderBy<T>(this IQueryable<T> query, List<(SortingOption, Expression<Func<T, object>>)> orderByList) where T : BaseEntity
 		{
 			if (orderByList == null)
 				return query;
@@ -17,6 +18,9 @@ namespace DAS.Core.PagingAndFiltering
 			orderByList = orderByList.OrderBy(ob => ob.Item1.Priority).ToList();
 
 			IOrderedQueryable<T> orderedQuery = null;
+
+			if (orderByList == null || orderByList.Count() == 0)
+				orderedQuery = query.OrderBy(x => x.Id);
 
 			foreach (var orderBy in orderByList)
 			{
@@ -29,10 +33,10 @@ namespace DAS.Core.PagingAndFiltering
 			return orderedQuery;
 		}
 
-		public static IQueryable<T> MyWhere<T>(this IQueryable<T> query, List<(FilteringOption, Expression<Func<T, bool>>)> filterList = null)
+		public static IQueryable<T> MyWhere<T>(this IQueryable<T> query, List<(FilteringOption, Expression<Func<T, bool>>)> filterList = null) where T : BaseEntity
 		{
-			if (filterList == null)
-				return query;
+			if (filterList == null || filterList.Count() == 0)
+				query = query.Where(x=>true);
 
 			foreach (var item in filterList)
 			{
