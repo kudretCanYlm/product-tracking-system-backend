@@ -18,41 +18,49 @@ using static Api.Models.User.UserModel;
 
 namespace Api.Mappings
 {
-    public class EntityToView : Profile
-    {
-        public override string ProfileName => "EntityToViewMap";
+	public class EntityToView : Profile
+	{
+		public override string ProfileName => "EntityToViewMap";
 
-        protected override void Configure()
-        {
-            Mapper.CreateMap<MessageEntity, MessageViewModel>()
-                .ForMember(x => x.Name, act => act.MapFrom(x => x.User.Name + " " + x.User.Surname));
+		protected override void Configure()
+		{
+			Mapper.CreateMap<MessageEntity, MessageViewModel>()
+				.ForMember(x => x.Name, act => act.MapFrom(x => x.User.Name + " " + x.User.Surname));
 
-            Mapper.CreateMap<CountryEntity, CountryViewModel>();
+			Mapper.CreateMap<CountryEntity, CountryViewModel>();
 
-            Mapper.CreateMap<ArticleEntity, ArticleViewModel>()
-                .ForMember(x => x.Content, act => act.MapFrom(x => x.ArticleContent))
-                .ForMember(x => x.ArticleOwnerId, act => act.MapFrom(x => x.ArticleOwner.Id))
-                .ForMember(x => x.OwnerName, act => act.MapFrom(x => x.ArticleOwner.Name))
-                .ForMember(x => x.OwnerSurname, act => act.MapFrom(x => x.ArticleOwner.Surname));
+			Mapper.CreateMap<ArticleEntity, ArticleViewModel>()
+				.ForMember(x => x.Content, act => act.MapFrom(x => x.ArticleContent))
+				.ForMember(x => x.ArticleOwnerId, act => act.MapFrom(x => x.ArticleOwner.Id))
+				.ForMember(x => x.OwnerName, act => act.MapFrom(x => x.ArticleOwner.Name))
+				.ForMember(x => x.OwnerSurname, act => act.MapFrom(x => x.ArticleOwner.Surname));
+			Mapper.CreateMap<ArticleEntity, ArticleDtoView>()
+				.ForMember(x => x.OwnerId, act => act.MapFrom(x => x.ArticleOwnerId))
+				.ForMember(x => x.OwnerName, act => act.MapFrom(x => x.ArticleOwner.Name))
+				.ForMember(x => x.OwnerSurname, act => act.MapFrom(x => x.ArticleOwner.Surname));
 
-            Mapper.CreateMap<ArticleDtoView, ArticleViewModel>()
-                .ForMember(x => x.Content, act => act.MapFrom(x => x.ArticleContent))
-                .ForMember(x => x.ArticleOwnerId, act => act.MapFrom(x => x.OwnerId));
+			Mapper.CreateMap<ArticleDtoView, ArticleViewModel>()
+				.ForMember(x => x.Content, act => act.MapFrom(x => x.ArticleContent))
+				.ForMember(x => x.ArticleOwnerId, act => act.MapFrom(x => x.OwnerId));
 
-            Mapper.CreateMap<ArticleLikeDislikeEntity, ArticleLikeDislikeSingleViewModel>()
-                .ForMember(x => x.Isliked, act => act.MapFrom(x => x.Isliked));
+			Mapper.CreateMap<ArticleLikeDislikeEntity, ArticleLikeDislikeSingleViewModel>()
+				.ForMember(x => x.Isliked, act => act.MapFrom(x => x.Isliked));
 
-            Mapper.CreateMap<ArticleCommentEntity, ArticleCommentViewModel>()
-                .ForMember(x => x.CommentOwnerName, act => act.MapFrom(x => x.CommentOwner.Name))
-                .ForMember(x => x.CommentOwnerSurname, act => act.MapFrom(x => x.CommentOwner.Surname));
+			Mapper.CreateMap<ArticleCommentEntity, ArticleCommentViewModel>()
+				.ForMember(x => x.CommentOwnerName, act => act.MapFrom(x => x.CommentOwner.Name))
+				.ForMember(x => x.CommentOwnerSurname, act => act.MapFrom(x => x.CommentOwner.Surname));
 
-            Mapper.CreateMap<ArticleCommentDto, ArticleCommentViewModel>();
+			Mapper.CreateMap<ArticleCommentDto, ArticleCommentViewModel>();
 
-            Mapper.CreateMap<ProjectEntity, ProjectViewModel>()
-                .ForMember(x => x.MoneyType, act => act.MapFrom(x => Enum.GetName(typeof(MoneyTypesEnum), x.MoneyType)));
+			Mapper.CreateMap<ProjectEntity, ProjectViewModel>()
+				.ForMember(x => x.MoneyType, act => act.MapFrom(x => Enum.GetName(typeof(MoneyTypesEnum), x.MoneyType)));
 
-            Mapper.CreateMap<UserRoleAndDescriptionEntity, UserRoleAndDescriptionViewModel>()
-                .ForMember(x => x.FullName, act => act.MapFrom(x => x.OwnerUser.Name + " " + x.OwnerUser.Surname));
-        }
-    }
+			Mapper.CreateMap<UserRoleAndDescriptionEntity, UserRoleAndDescriptionViewModel>()
+				.ForMember(x => x.Id, act => act.MapFrom(x => x.OwnerUserId))
+				.ForMember(x => x.Name, act => act.MapFrom(x => x.OwnerUser.Name + " " + x.OwnerUser.Surname))
+				.ForMember(x => x.Job, act => act.MapFrom(x => x.MiniRole))
+				.ForMember(x => x.Description, act => act.MapFrom(x => x.MiniDescription));
+
+		}
+	}
 }
