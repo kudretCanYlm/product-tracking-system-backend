@@ -1,14 +1,8 @@
-﻿using Api.Infrastructure.Jwt;
-using DAS.Model.Model.Chat;
+﻿using DAS.Model.Model.Chat;
 using DAS.Service.Services.Authentication;
-using DAS.Service.Services.Chat;
 using Microsoft.Web.WebSockets;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.WebSockets;
-using System.Threading;
-using System.Web;
 
 namespace Api.Socket
 {
@@ -30,11 +24,12 @@ namespace Api.Socket
 
         private ILoginService loginService;
 
-        public ChatSocketHandler()
-        {
-        }
+		//public ChatSocketHandler(ILoginService loginService)
+		//{
+		//	this.loginService = loginService;
+		//}
 
-        public void SetUserId(string userId)
+		public void SetUserId(string userId)
         {
             this.connectedUser.UserId = userId;
         }
@@ -101,12 +96,13 @@ namespace Api.Socket
 
         public override void OnOpen()
         {
-            var userName = this.WebSocketContext.Headers["userName"].ToString();
+            //var userName = this.WebSocketContext.Headers["userName"].ToString();
 
-            this.connectedUser.UserName = userName;
-
+            this.connectedUser.UserName = "test";
+            
             all_clients.Add(this);
-
+            var owner =all_clients.Where(x => x==this).FirstOrDefault();
+            owner.Send("melih beyyyy");
         }
 
         public override void OnMessage(string message)
