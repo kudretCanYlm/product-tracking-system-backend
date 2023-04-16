@@ -1,22 +1,33 @@
-﻿using DAS.Data.Context;
+﻿using DAS.Core.Specifications.Base;
+using DAS.Data.Context;
 using DAS.Model.Base;
-using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAS.Core.Infrastructure
 {
-    public class RepositoryBase<T> where T:BaseEntity
+    public class RepositoryBase<T>:IRepository<T> where T:BaseEntity
     {
         private DASContext dasContext;
         private readonly IDbSet<T> dbset;
+		public IQueryable<T> Table => dbset;
 
-        protected RepositoryBase(IDatabaseFactory databaseFactory)
+		public IQueryable<T> TableNoTracking => dbset.AsNoTracking();
+
+		public  IEnumerable<T> GetSpec(ISpecification<T> spec)
+		{
+			return  ApplySpecification(spec).ToList();
+		}
+
+		private IQueryable<T> ApplySpecification(ISpecification<T> spec)
+        {
+			return SpecificationEvaluator<T>.GetQuery(Table, spec);
+		}
+
+		protected RepositoryBase(IDatabaseFactory databaseFactory)
         {
             DatabaseFactory = databaseFactory;
             dbset = DasContext.Set<T>();
@@ -102,9 +113,21 @@ namespace DAS.Core.Infrastructure
             return result;
         }
 
-        public T Get(Expression<Func<T, bool>> where)
+		public IQueryable<T> GetPage<TOrder>(IQueryable<T> include, Page page, Expression<Func<T, bool>> where, Expression<Func<T, TOrder>> order)
+		{
+            var result = include.OrderBy(order).Where(where).GetPage(page);
+            return result;
+		}
+
+		public T Get(Expression<Func<T, bool>> where)
         {
             return dbset.Where(where).FirstOrDefault<T>();
         }
-    }
+
+		public IQueryable<T> GetQuery()
+		{
+            return dbset;
+		}
+
+	}
 }

@@ -1,4 +1,5 @@
-﻿using DAS.Model.Base;
+﻿using DAS.Core.Specifications.Base;
+using DAS.Model.Base;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,11 @@ namespace DAS.Core.Infrastructure
         IEnumerable<T> GetAll();
         IEnumerable<T> GetMany(Expression<Func<T, bool>> where);
         IQueryable<T> GetManyQuery(Expression<Func<T, bool>> where);
+        IQueryable<T> GetQuery();
         IQueryable<T> GetPage<TOrder>(Page page, Expression<Func<T, bool>> where, Expression<Func<T, TOrder>> order);
-    }
+        IQueryable<T> GetPage<TOrder>(IQueryable<T> include, Page page, Expression<Func<T, bool>> where, Expression<Func<T, TOrder>> order);
+        IEnumerable<T> GetSpec(ISpecification<T> spec);
+
+
+	}
 }
