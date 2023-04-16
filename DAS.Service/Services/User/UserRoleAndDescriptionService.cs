@@ -1,4 +1,5 @@
 ﻿using DAS.Core.Infrastructure;
+using DAS.Core.PagingAndFiltering;
 using DAS.Core.Repository.Authentication;
 using DAS.Core.Repository.Project;
 using DAS.Core.Repository.User;
@@ -18,6 +19,7 @@ namespace DAS.Service.Services.User
 	{
 		object AddUserRoleAndDescription(UserRoleAndDescriptionEntity entity);
 		IEnumerable<UserRoleAndDescriptionEntity> GetUserRoleAndDescriptionByRange<TOrder>(int pageNumber, int pageSize, Expression<Func<UserRoleAndDescriptionEntity, TOrder>> orderBy);
+		IPagedList<UserRoleAndDescriptionEntity> GetUserRoleAndDescriptionByRangeWithFilterAndSorting(PageSearchArgs args);
 	}
 	public class UserRoleAndDescriptionService:IUserRoleAndDescriptionService
 	{
@@ -26,11 +28,12 @@ namespace DAS.Service.Services.User
 		private readonly IUnitOfWork unitOfWork;
 		private readonly IUserRoleAndDescriptionValidation validator;
 
-		public UserRoleAndDescriptionService(ILoginRepository loginRepository, IUserRoleAndDescriptionRepository userRoleAndDescriptionRepository, IUnitOfWork unitOfWork)
+		public UserRoleAndDescriptionService(ILoginRepository loginRepository, IUserRoleAndDescriptionRepository userRoleAndDescriptionRepository, IUnitOfWork unitOfWork, IUserRoleAndDescriptionValidation validator)
 		{
 			this.loginRepository = loginRepository;
 			this.userRoleAndDescriptionRepository = userRoleAndDescriptionRepository;
 			this.unitOfWork = unitOfWork;
+			this.validator = validator;
 		}
 
 		public object AddUserRoleAndDescription(UserRoleAndDescriptionEntity entity)
@@ -39,7 +42,7 @@ namespace DAS.Service.Services.User
 			if(validator.IsValidEntity(entity))
 			{
 				userRoleAndDescriptionRepository.Add(entity);
-				return SaveProjectWithMessage();
+				return SaveUserRoleAndDescriptionWithMessage();
 			}
 
 			return validator.GetValidErrorMessages(entity);
@@ -50,12 +53,19 @@ namespace DAS.Service.Services.User
 			var page = new Page(pageNumber, pageSize);
 			if (page.Skip < 0)
 				return null;
-			var userRoleAndDescriptions = userRoleAndDescriptionRepository.GetPage(page, x => true, orderBy).ToList();
+			var userRoleAndDescriptions = userRoleAndDescriptionRepository.GetUserRoleAndDescriptionsByPage(page, x => true, orderBy).ToList();
 
 			return userRoleAndDescriptions;
 		}
 
-		private object SaveProjectWithMessage()
+		public IPagedList<UserRoleAndDescriptionEntity> GetUserRoleAndDescriptionByRangeWithFilterAndSorting(PageSearchArgs args)
+		{
+			var userRoleAndDescription = userRoleAndDescriptionRepository.GetUserRoleAndDescriptionsByPagedList(args);
+
+			return userRoleAndDescription;
+		}
+
+		private object SaveUserRoleAndDescriptionWithMessage()
 		{
 			try
 			{
