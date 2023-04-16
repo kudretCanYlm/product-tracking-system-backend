@@ -1,12 +1,11 @@
 ﻿using Api.Infrastructure.Attributes;
 using Api.Models.Article;
 using AutoMapper;
-using DAS.Model.Base.Enums;
+using DAS.Core.PagingAndFiltering;
 using DAS.Model.Model.Article;
 using DAS.Model.Model.Enums;
 using DAS.Service.Services.Article;
 using DAS.Service.Services.Authentication;
-using DAS.Service.Services.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -188,6 +187,21 @@ namespace Api.Controllers
                 return Request.CreateResponse(HttpStatusCode.Accepted, $"{myComment.Id} deleted");
             return Request.CreateResponse(HttpStatusCode.BadRequest, result.ToString());
         }
+
+        [HttpPost,Route("articleGetTest"),AllowAnonymous]
+        public HttpResponseMessage GetArticleTest([FromBody] PageSearchArgs args)
+        {
+
+            var articles = articleService.GetUserArticles(args);
+
+            if (articles.Items.Count() == 0)
+                return Request.CreateResponse(HttpStatusCode.BadRequest,articles);
+
+            var articlesView = Mapper.Map<IEnumerable<ArticleViewModel>>(articles.Items);
+
+			return Request.CreateResponse(HttpStatusCode.Created, articlesView);
+                
+		}
 
     }
 }

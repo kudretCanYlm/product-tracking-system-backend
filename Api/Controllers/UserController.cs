@@ -2,6 +2,7 @@
 using Api.Models.Authentication;
 using Api.Models.Project;
 using AutoMapper;
+using DAS.Core.PagingAndFiltering;
 using DAS.Model.Model.Authentication;
 using DAS.Model.Model.Enums;
 using DAS.Model.Model.Project;
@@ -45,7 +46,9 @@ namespace Api.Controllers
         {
             if(userRoleAndDescriptionPostModel==null)
 				return Request.CreateResponse(HttpStatusCode.BadRequest, "userRoleAndDescriptionPostModel is null");
-            userRoleAndDescriptionPostModel.OwnerUserId = Guid.Parse(ActionContext.RequestContext.Principal.Identity.Name);
+			string userName = ActionContext.RequestContext.Principal.Identity.Name;
+			var userId = loginService.GetUserId(userName);
+			userRoleAndDescriptionPostModel.OwnerUserId = userId;
 
 			var userRoleAndDescriptionEntity = Mapper.Map<UserRoleAndDescriptionEntity>(userRoleAndDescriptionPostModel);
 
@@ -59,7 +62,7 @@ namespace Api.Controllers
 		}
 
 
-		[Route("getUserRoleAndDescriptionByRange/{pageNumber}/{pageSize}")]
+		[HttpGet,Route("getUserRoleAndDescriptionByRange/{pageNumber}/{pageSize}"), ]
         public HttpResponseMessage GetUserRoleAndDescriptionByRange(int pageNumber, int pageSize)
         {
             var userRoleAndDescriptions = userRoleAndDescriptionService.GetUserRoleAndDescriptionByRange(pageNumber, pageSize, x => x.OwnerUser.Username);
@@ -67,6 +70,18 @@ namespace Api.Controllers
 			return Request.CreateResponse(HttpStatusCode.OK, Mapper.Map<IEnumerable<UserRoleAndDescriptionViewModel>>(userRoleAndDescriptions));
 
 		}
+
+		[HttpPost,Route("getUserRoleAndDescriptionByPagedList"), JwtAuthentication(RoleEnum.Admin)]
+		public HttpResponseMessage getUserRoleAndDescriptionByPagedList([FromBody] PageSearchArgs args)
+		{
+			var userRoleAndDescriptions=userRoleAndDescriptionService.GetUserRoleAndDescriptionByRangeWithFilterAndSorting(args);
+
+			var userRolesAndDescriptionsView = Mapper.Map<IEnumerable<UserRoleAndDescriptionViewModel>>(userRoleAndDescriptions.Items);
+
+			return Request.CreateResponse(HttpStatusCode.OK, userRolesAndDescriptionsView);
+
+		}
+
 
 	}
 }
