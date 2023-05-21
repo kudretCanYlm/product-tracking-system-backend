@@ -1,7 +1,6 @@
 ﻿using Api.Infrastructure.Attributes;
 using Api.Models.Login;
 using AutoMapper;
-using DAS.Core.Common;
 using DAS.Core.PagingAndFiltering;
 using DAS.Model.Model.Enums;
 using DAS.Model.Model.User;
