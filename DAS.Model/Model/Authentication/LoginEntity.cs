@@ -62,7 +62,7 @@ namespace DAS.Model.Model.Authentication
                 this.Password = sbPassword.ToString();
             }
         }
-    }
+	}
 
     public interface ILoginValidation : IValidator<LoginEntity>
     {
@@ -89,7 +89,7 @@ namespace DAS.Model.Model.Authentication
                 .NotNull().WithMessage("don't be null ");
 
             RuleFor(x => x.Username)
-                .Length(5, 50).WithMessage("username length must be 1-50")
+                .Length(5, 50).WithMessage("username length must be 5-50")
                 .NotEmpty().WithMessage("don't be empty")
                 .NotNull().WithMessage("don't be null ");
 
@@ -97,7 +97,7 @@ namespace DAS.Model.Model.Authentication
                 .Length(5, 50)
                 .NotEmpty().WithMessage("don't be empty")
                 .NotNull().WithMessage("don't be null ")
-                .WithMessage("password length must be 1-50");
+                .WithMessage("password length must be 5-50");
 
             RuleFor(x => x.CreatedAt)
                 .NotEmpty().WithMessage("don't be empty")
