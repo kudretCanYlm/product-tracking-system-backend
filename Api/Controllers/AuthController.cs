@@ -5,14 +5,9 @@ using AutoMapper;
 using DAS.Model.Model.Authentication;
 using DAS.Model.Model.Enums;
 using DAS.Service.Services.Authentication;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Web.Http;
-using System.Web.Http.Routing;
 
 namespace Api.Controllers
 {
@@ -46,7 +41,21 @@ namespace Api.Controllers
                 
         }
 
-        [Route("getUsername"), JwtAuthentication(RoleEnum.Admin)]
+		[Route("signUp"), AllowAnonymous, HttpPost]
+		public HttpResponseMessage SignUp([FromBody] LoginPostModelNewUser loginEntity)
+		{
+			object result = loginService.AddNewUser(Mapper.Map<LoginPostModelNewUser, LoginEntity>(loginEntity));
+
+			if (result is true)
+            {
+				var token = JwtManager.GenerateToken(loginEntity.Username, RoleEnum.Admin);
+				return Request.CreateResponse(HttpStatusCode.Created,token);
+			}
+			else
+				return Request.CreateResponse(HttpStatusCode.BadRequest, result);
+		}
+
+		[Route("getUsername"), JwtAuthentication(RoleEnum.Admin)]
         public HttpResponseMessage GetTest()
         {
             string name=ActionContext.RequestContext.Principal.Identity.Name;
