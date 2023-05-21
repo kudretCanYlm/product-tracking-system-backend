@@ -1,11 +1,13 @@
 ﻿using Api.Models.Article;
 using Api.Models.Chat;
 using Api.Models.Location;
+using Api.Models.Login;
 using Api.Models.Project;
 using AutoMapper;
 using DAS.Model.Base.Enums;
 using DAS.Model.Dto.Article;
 using DAS.Model.Model.Article;
+using DAS.Model.Model.Authentication;
 using DAS.Model.Model.Chat;
 using DAS.Model.Model.Location;
 using DAS.Model.Model.Project;
@@ -61,6 +63,7 @@ namespace Api.Mappings
 				.ForMember(x => x.Job, act => act.MapFrom(x => x.MiniRole))
 				.ForMember(x => x.Description, act => act.MapFrom(x => x.MiniDescription));
 
+			Mapper.CreateMap<LoginEntity, AuthorizedUserInformationMiniModel>();
 		}
 	}
 }
